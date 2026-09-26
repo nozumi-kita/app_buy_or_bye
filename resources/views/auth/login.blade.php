@@ -9,5 +9,6 @@
         <label for="password">パスワード</label>
         <input id="password" type="password" name="password">
         <button type="submit">ログイン</button>
+        <a href="{{ route('register') }}">アカウントをお持ちでない方はこちらから</a>
     </form>
 </main>

@@ -11,8 +11,9 @@ Route::controller(AuthenticatedSessionController::class)->group(function () {
     Route::post('/logout', 'destroy')->middleware('auth')->name('logout');
 });
 
-Route::controller(RegisteredUserController::class)->group(function () {
-    Route::get('/register', 'create');
+Route::controller(RegisteredUserController::class)->middleware('guest')->group(function () {
+    Route::get('/register', 'create')->name('register');
+    Route::post('/register', 'store');
 });
 
 Route::resource('items', ItemController::class)->middleware('auth');

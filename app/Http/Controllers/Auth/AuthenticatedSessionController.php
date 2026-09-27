@@ -17,15 +17,22 @@ class AuthenticatedSessionController extends Controller
 
     public function store(LoginRequest $request)
     {
-        if (Auth::attempt($request->credentials())) {
-            $request->session()->regenerate();
+        $request->ensureIsNotRateLimited();
 
-            return redirect()->intended(route('items.index'));
+        if (! Auth::attempt($request->credentials())) {
+            $request->recordFailedAttempt();
+
+            throw ValidationException::withMessages([
+                'email' => 'メールアドレスまたはパスワードが正しくありません。',
+            ]);
         }
 
-        throw ValidationException::withMessages([
-            'email' => 'メールアドレスまたはパスワードが正しくありません。',
-        ]);
+        $request->clearFailedAttempts();
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(route('items.index'));
+
     }
 
     public function destroy(Request $request)

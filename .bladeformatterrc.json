@@ -1,3 +1,5 @@
 {
-    "extraLiners": []
+    "extraLiners": [],
+    "wrapAttributes": "force-expand-multiline",
+    "wrapAttributesMinAttrs": 4
 }

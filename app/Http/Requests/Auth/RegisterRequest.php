@@ -4,7 +4,9 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
+use Override;
 
 class RegisterRequest extends FormRequest
 {
@@ -43,5 +45,13 @@ class RegisterRequest extends FormRequest
     public function password(): string
     {
         return $this->validated('password');
+    }
+
+    #[Override]
+    protected function prepareForValidation(): void
+    {
+        if (is_string($this->input('email'))) {
+            $this->merge(['email' => Str::lower($this->input('email'))]);
+        }
     }
 }

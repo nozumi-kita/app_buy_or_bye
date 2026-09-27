@@ -1,11 +1,87 @@
-@import 'tailwindcss';
+/* 基本設定 */
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+}
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+a {
+    color: #0066cc;
+    text-underline-offset: 0.2em;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+a:visited {
+    color: #0066cc;
+}
+
+a:hover {
+    color: #004499;
+    text-decoration-thickness: 2px;
+}
+
+/* 認証画面 */
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.auth-card {
+    width: min(100%, 400px);
+    margin: 20px;
+    border: solid 1px #000;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.auth-title {
+    font-size: 24px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    margin-bottom: 10px;
+}
+
+.form-input {
+    border: 1px solid #000;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 8px;
+}
+
+.form-input::placeholder {
+    opacity: 0.45;
+}
+
+.btn-primary {
+    width: 100%;
+    border-radius: 8px;
+    color: white;
+    border: none;
+    background: rgb(39, 87, 243);
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 12px 0 15px;
+}
+
+.btn-primary:hover {
+    opacity: 0.7;
+}
+
+.auth-footer {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.form-error {
+    color: #d32f2f;
+    margin: 0px;
 }

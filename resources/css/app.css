@@ -115,6 +115,8 @@ li {
 .item-list {
     display: flex;
     flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
 }
 
 .item-card {
@@ -169,4 +171,18 @@ li {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* ------------------------
+スマートフォン
+------------------------- */
+@media screen and (max-width: 767px) {
+    .item-list {
+        flex-direction: column;
+    }
+
+    .item-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }

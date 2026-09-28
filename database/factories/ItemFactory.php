@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ItemStatus;
 use App\Models\Item;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -31,7 +32,7 @@ class ItemFactory extends Factory
             'price' => fake()->numberBetween(5000, 50000),
             'image_key' => 'default',
             'memo' => fake()->realText(50, 5),
-            'status' => 'pending',
+            'status' => ItemStatus::Pending,
             'status_changed_at' => now(),
         ];
     }

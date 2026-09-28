@@ -18,6 +18,10 @@ a:hover {
     text-decoration-thickness: 2px;
 }
 
+li {
+    list-style: none;
+}
+
 /* 認証画面 */
 .auth {
     display: flex;
@@ -84,4 +88,85 @@ a:hover {
 .form-error {
     color: #d32f2f;
     margin: 0px;
+}
+
+/* ヘッダー */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-list {
+    display: flex;
+}
+
+.nav-list .nav-item {
+    margin-left: 20px;
+}
+
+.container {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 960px;
+}
+
+/* 気になるもの一覧画面 */
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-card {
+    width: 32%;
+    margin: 0 2% 2% 0;
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 0 10px;
+    height: 230px;
+}
+
+.item-list li:nth-child(3n) {
+    margin-right: 0;
+}
+
+.item-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item-name {
+    font-size: 16px;
+}
+
+.status-badge {
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 2px;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-detail {
+    display: flex;
+    gap: 1em;
+    margin-bottom: 20px;
+}
+
+.detail-label {
+    flex-shrink: 0;
+}
+
+.detail-value {
+    margin: 0;
+}
+
+.detail-value.memo {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

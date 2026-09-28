@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -12,7 +13,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return view('items.index');
+        return view('items.index', [
+            'items' => Auth::user()->items()->orderBy('updated_at', 'DESC')->get(),
+        ]);
     }
 
     /**

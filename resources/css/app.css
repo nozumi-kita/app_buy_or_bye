@@ -22,25 +22,36 @@ li {
     list-style: none;
 }
 
-/* 認証画面 */
-.auth {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    min-height: 100dvh;
+.container {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 960px;
 }
 
-.auth-card {
+/* フラッシュメッセージ */
+.flash {
+    display: flex;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    height: 40px;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.flash-success {
+    background-color: #26e452;
+}
+
+/* フォーム */
+.form-card {
     width: min(100%, 400px);
     margin: 20px;
     border: solid 1px #000;
     border-radius: 8px;
     padding: 20px;
-}
-
-.auth-title {
-    font-size: 24px;
+    margin: 0 auto;
 }
 
 .form-field {
@@ -64,6 +75,55 @@ li {
     opacity: 0.45;
 }
 
+.btn-register {
+    width: 30%;
+    border-radius: 8px;
+    color: white;
+    border: none;
+    background: rgb(39, 87, 243);
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 12px 0 15px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-error {
+    color: #d32f2f;
+    margin: 0px;
+}
+
+/* 認証画面 */
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.auth-card {
+    width: min(100%, 400px);
+    margin: 20px;
+    border: solid 1px #000;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.auth-title {
+    font-size: 24px;
+}
+
+.auth-footer {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
 .btn-primary {
     width: 100%;
     border-radius: 8px;
@@ -78,16 +138,6 @@ li {
 
 .btn-primary:hover {
     opacity: 0.7;
-}
-
-.auth-footer {
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.form-error {
-    color: #d32f2f;
-    margin: 0px;
 }
 
 /* ヘッダー */
@@ -105,13 +155,13 @@ li {
     margin-left: 20px;
 }
 
-.container {
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 960px;
+/* 気になるもの一覧画面 */
+.item-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* 気になるもの一覧画面 */
 .item-list {
     display: flex;
     flex-wrap: wrap;
@@ -140,12 +190,16 @@ li {
 
 .item-name {
     font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .status-badge {
     border: 1px solid #000;
     border-radius: 8px;
     padding: 2px;
+    flex-shrink: 0;
 }
 
 .item-details {

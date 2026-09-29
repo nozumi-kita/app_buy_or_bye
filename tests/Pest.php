@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ItemStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -26,4 +27,20 @@ function validRegistrationData(array $overrides = []): array
         'password' => 'password',
         'password_confirmation' => 'password',
     ], $overrides);
+}
+
+function validItemData(array $overrides = []): array
+{
+    return array_merge([
+        'name' => 'テスト',
+        'price' => '10000',
+        'memo' => 'テストメモ',
+    ], $overrides);
+}
+
+function validItemDataUpdate(array $overrides = []): array
+{
+    return validItemData(array_merge([
+        'status' => ItemStatus::Pending->value,
+    ], $overrides));
 }

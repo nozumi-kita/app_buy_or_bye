@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\User;
+use Tests\TestCase;
 
 test('ログアウトをし、認証状態を解除すること', function () {
+    /** @var TestCase $this */
     $this->actingAs(User::factory()->create())
         ->post(route('logout'))->assertRedirect(route('login'));
 
@@ -12,5 +14,6 @@ test('ログアウトをし、認証状態を解除すること', function () {
 });
 
 test('未認証状態でログアウトを試みるとログイン画面にリダイレクトされること', function () {
+    /** @var TestCase $this */
     $this->post(route('logout'))->assertRedirect(route('login'));
 });

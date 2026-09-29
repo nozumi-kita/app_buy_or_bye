@@ -18,4 +18,4 @@ Route::controller(RegisteredUserController::class)->middleware('guest')->group(f
     Route::post('/register', 'store')->middleware('throttle:register');
 });
 
-Route::resource('items', ItemController::class)->middleware('auth');
+Route::resource('items', ItemController::class)->middleware('auth')->where(['item' => '[0-9]+']);

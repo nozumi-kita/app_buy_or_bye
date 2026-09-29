@@ -218,6 +218,7 @@ return [
         'line_address_1'           => '住所1行目',
         'line_address_2'           => '住所2行目',
         'login'                    => 'ログイン',
+        'memo'                     => 'メモ',
         'message'                  => 'メッセージ',
         'middle_name'              => 'ミドルネーム',
         'minute'                   => '分',

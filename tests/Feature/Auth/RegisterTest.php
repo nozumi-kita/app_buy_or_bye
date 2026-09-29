@@ -3,12 +3,15 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
 
 test('登録画面が表示されること', function () {
+    /** @var TestCase $this */
     $this->get(route('register'))->assertOk()->assertViewIs('auth.register');
 });
 
 test('ユーザー登録が成功し、DBに保存され、認証状態になること', function () {
+    /** @var TestCase $this */
     $this->post(route('register'), validRegistrationData())
         ->assertRedirect(route('items.index'));
 
@@ -17,6 +20,7 @@ test('ユーザー登録が成功し、DBに保存され、認証状態になる
 });
 
 test('各項目が登録できること', function (array $overrides) {
+    /** @var TestCase $this */
     $this->post(route('register'), validRegistrationData($overrides))
         ->assertRedirect(route('items.index'));
 
@@ -28,6 +32,7 @@ test('各項目が登録できること', function (array $overrides) {
 ]);
 
 test('メールアドレスは小文字で保存されること', function () {
+    /** @var TestCase $this */
     $this->post(route('register'), validRegistrationData([
         'email' => 'TEst@ExAmple.Com',
     ]));
@@ -38,6 +43,7 @@ test('メールアドレスは小文字で保存されること', function () {
 });
 
 test('既存のメールアドレスでは登録できないこと', function () {
+    /** @var TestCase $this */
     User::factory()->create(['email' => 'test@example.com']);
     $this->post(route('register'), validRegistrationData())
         ->assertInvalid(['email']);
@@ -47,6 +53,7 @@ test('既存のメールアドレスでは登録できないこと', function ()
 });
 
 test('大文字小文字だけが違うメールアドレスでは登録できないこと', function () {
+    /** @var TestCase $this */
     User::factory()->create(['email' => 'test@example.com']);
 
     $this->post(route('register'), validRegistrationData([
@@ -55,6 +62,7 @@ test('大文字小文字だけが違うメールアドレスでは登録でき�
 });
 
 test('各項目が空・不正な形式なら登録できないこと', function (array $overrides, array $errors) {
+    /** @var TestCase $this */
     $this->post(route('register'), validRegistrationData($overrides))
         ->assertInvalid($errors);
 
@@ -71,6 +79,7 @@ test('各項目が空・不正な形式なら登録できないこと', function
 ]);
 
 test('パスワードがハッシュ化されていること', function () {
+    /** @var TestCase $this */
     $userData = validRegistrationData();
 
     $this->post(route('register'), $userData);
@@ -82,10 +91,12 @@ test('パスワードがハッシュ化されていること', function () {
 });
 
 test('認証済みのユーザーは登録画面に入れないこと', function () {
+    /** @var TestCase $this */
     $this->actingAs(User::factory()->create())->get(route('register'))->assertRedirect(route('items.index'));
 });
 
 test('1分間に10回を超えて登録できないこと', function () {
+    /** @var TestCase $this */
     foreach (range(1, 10) as $i) {
         $this->post(route('register'), validRegistrationData([
             'email' => "test{$i}@example.com",

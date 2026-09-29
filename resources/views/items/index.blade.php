@@ -14,24 +14,30 @@
                 @foreach ($items as $item)
                     <li class="item-card">
                         <div class="item-card-header">
-                            <h3 class="item-name">{{ $item->name }}</h3>
+                            <h3 class="item-name">
+                                <a class="item-card-link" href="{{ route('items.show', $item) }}">
+                                    {{ $item->name }}
+                                </a>
+                            </h3>
                             <span class="status-badge">{{ $item->status->label() }}</span>
                         </div>
-                        <dl class="item-details">
-                            <div class="item-detail">
-                                <dt class="detail-label">価格</dt>
-                                <dd class="detail-value">{{ Number::currency($item->price, in: 'JPY') }}</dd>
+                        <dl class="item-contents">
+                            <div class="item-content">
+                                <dt class="item-content-label">価格</dt>
+                                <dd class="item-content-value">{{ Number::currency($item->price, in: 'JPY') }}</dd>
                             </div>
-                            <div class="item-detail">
-                                <dt class="detail-label">メモ</dt>
-                                <dd class="detail-value memo">{{ $item->memo }}</dd>
+                            <div class="item-content">
+                                <dt class="item-content-label">メモ</dt>
+                                <dd class="item-content-value memo">{{ $item->memo }}</dd>
                             </div>
-                            <div class="item-detail">
-                                <dt class="detail-label">更新日時</dt>
-                                <dd class="detail-value">{{ $item->updated_at->format('Y/m/d H:i') }}</dd>
+                            <div class="item-content">
+                                <dt class="item-content-label">更新日時</dt>
+                                <dd class="item-content-value">{{ $item->updated_at->format('Y/m/d H:i') }}</dd>
                             </div>
                         </dl>
-                        <a href="{{ route('items.edit', $item) }}">編集</a>
+                        <div class="edit-link">
+                            <a class="link item-edit-link" href="{{ route('items.edit', $item) }}">編集</a>
+                        </div>
                     </li>
                 @endforeach
             </ul>

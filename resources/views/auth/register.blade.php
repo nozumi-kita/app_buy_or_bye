@@ -63,7 +63,7 @@
                     required
                 >
             </div>
-            <button class="btn-primary" type="submit">登録</button>
+            <button class="btn btn-primary" type="submit">登録</button>
         </form>
         <div class="auth-footer">
             <a href="{{ route('login') }}">アカウントをお持ちの方はこちら</a>

@@ -51,8 +51,8 @@
                 @enderror
             </div>
             <div class="form-actions">
-                <a href="{{ route('items.index') }}">キャンセル</a>
-                <button class="btn-register" type="submit">登録</button>
+                <a class="link-cancel" href="{{ route('items.index') }}">キャンセル</a>
+                <button class="btn btn-primary" type="submit">登録</button>
             </div>
         </form>
     </section>

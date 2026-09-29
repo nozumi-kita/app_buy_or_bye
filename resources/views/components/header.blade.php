@@ -8,7 +8,7 @@
             <li class="nav-item">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit">ログアウト</button>
+                    <button class="btn btn-logout" type="submit">ログアウト</button>
                 </form>
             </li>
         </ul>

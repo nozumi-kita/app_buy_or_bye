@@ -35,7 +35,7 @@
                     <p class="form-error">{{ $message }}</p>
                 @enderror
             </div>
-            <button class="btn-primary" type="submit">ログイン</button>
+            <button class="btn btn-primary" type="submit">ログイン</button>
         </form>
         <div class="auth-footer">
             <a href="{{ route('register') }}">アカウントをお持ちでない方はこちら</a>

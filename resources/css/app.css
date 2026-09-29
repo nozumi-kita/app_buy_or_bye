@@ -9,10 +9,6 @@ a {
     text-underline-offset: 0.2em;
 }
 
-a:visited {
-    color: #0066cc;
-}
-
 a:hover {
     color: #004499;
     text-decoration-thickness: 2px;
@@ -22,10 +18,27 @@ li {
     list-style: none;
 }
 
+/* 共通パーツ */
 .container {
-    padding: 20px;
+    padding: 0 20px;
     margin: 0 auto;
     max-width: 960px;
+}
+
+.btn:hover,
+.link:hover {
+    opacity: 0.7;
+}
+
+.btn-primary {
+    border-radius: 8px;
+    color: white;
+    border: none;
+    background: rgb(39, 87, 243);
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100px;
 }
 
 /* フラッシュメッセージ */
@@ -44,10 +57,214 @@ li {
     background-color: #26e452;
 }
 
-/* フォーム */
-.form-card {
-    width: min(100%, 400px);
+/* 認証画面 */
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.auth-card {
+    width: min(100%, 450px);
     margin: 20px;
+    border: solid 1px #000;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.auth-card .btn-primary {
+    width: 100%;
+    margin: 12px 0 15px;
+}
+
+.auth-title {
+    font-size: 24px;
+}
+
+.auth-footer {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* ヘッダー */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list .nav-item {
+    margin-left: 20px;
+}
+
+.btn-logout {
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    height: 40px;
+    color: #fff;
+    background-color: #888888;
+    cursor: pointer;
+}
+
+/* 気になるもの一覧画面 */
+.item-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.item-card {
+    width: 32%;
+    margin: 0 2% 2% 0;
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 0 10px;
+    height: 250px;
+    position: relative;
+}
+
+.item-card:hover {
+    background: #fff8f6;
+}
+
+.item-card .item-card-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.item-card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+.item-list li:nth-child(3n) {
+    margin-right: 0;
+}
+
+.item-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item-name {
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status-badge {
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 2px;
+    flex-shrink: 0;
+}
+
+.item-content {
+    display: flex;
+    gap: 1em;
+    margin-bottom: 20px;
+}
+
+.item-content-label {
+    flex-shrink: 0;
+}
+
+.item-content-value {
+    margin: 0;
+}
+
+.item-content-value.memo {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-edit-link,
+.item-edit-link:hover {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    background-color: #26e452;
+    border-radius: 8px;
+    display: flex;
+    width: 100px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.edit-link {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 気になるもの詳細画面 */
+.item-detail-card {
+    width: min(100%, 450px);
+    border: solid 1px #000;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 0 auto;
+}
+
+.item-detail-content {
+    display: flex;
+    margin-bottom: 50px;
+    border-bottom: 1px solid #000;
+}
+
+.item-detail-label {
+    flex: 0 0 6em;
+}
+
+.item-detail-value {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.item-detail-value.memo {
+    white-space: pre-wrap;
+}
+
+.detail-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-delete {
+    width: 100px;
+    height: 40px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* 気になるもの登録・編集フォーム */
+.form-card {
+    width: min(100%, 450px);
     border: solid 1px #000;
     border-radius: 8px;
     padding: 20px;
@@ -75,16 +292,11 @@ li {
     opacity: 0.45;
 }
 
-.btn-register {
-    width: 30%;
-    border-radius: 8px;
-    color: white;
-    border: none;
-    background: rgb(39, 87, 243);
-    height: 40px;
+.form-select {
     font-size: 16px;
-    cursor: pointer;
-    margin: 12px 0 15px;
+    padding: 8px;
+    border: 1px solid #000;
+    border-radius: 8px;
 }
 
 .form-actions {
@@ -98,133 +310,20 @@ li {
     margin: 0px;
 }
 
-/* 認証画面 */
-.auth {
+.form-actions .link-cancel {
     display: flex;
+    width: 100px;
+    height: 40px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 8px;
+    background-color: #6b7280;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    min-height: 100dvh;
 }
 
-.auth-card {
-    width: min(100%, 400px);
-    margin: 20px;
-    border: solid 1px #000;
-    border-radius: 8px;
-    padding: 20px;
-}
-
-.auth-title {
-    font-size: 24px;
-}
-
-.auth-footer {
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.btn-primary {
-    width: 100%;
-    border-radius: 8px;
-    color: white;
-    border: none;
-    background: rgb(39, 87, 243);
-    height: 40px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 12px 0 15px;
-}
-
-.btn-primary:hover {
+.link-cancel:hover {
     opacity: 0.7;
-}
-
-/* ヘッダー */
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-list {
-    display: flex;
-}
-
-.nav-list .nav-item {
-    margin-left: 20px;
-}
-
-/* 気になるもの一覧画面 */
-.item-list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.item-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    padding: 0;
-}
-
-.item-card {
-    width: 32%;
-    margin: 0 2% 2% 0;
-    border: 1px solid #000;
-    border-radius: 8px;
-    padding: 0 10px;
-    height: 230px;
-}
-
-.item-list li:nth-child(3n) {
-    margin-right: 0;
-}
-
-.item-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.item-name {
-    font-size: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.status-badge {
-    border: 1px solid #000;
-    border-radius: 8px;
-    padding: 2px;
-    flex-shrink: 0;
-}
-
-.item-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.item-detail {
-    display: flex;
-    gap: 1em;
-    margin-bottom: 20px;
-}
-
-.detail-label {
-    flex-shrink: 0;
-}
-
-.detail-value {
-    margin: 0;
-}
-
-.detail-value.memo {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 /* ------------------------

@@ -36,6 +36,6 @@ class ItemPolicy
     {
         return $user->id === $item->user_id
             ? Response::allow()
-            : Response::denyWithStatus(404);
+            : Response::denyAsNotFound();
     }
 }

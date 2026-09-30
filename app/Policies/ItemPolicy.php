@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\Item;
 use App\Models\User;
-use App\Support\GuestSession;
+use App\Support\ItemOwner;
 use Illuminate\Auth\Access\Response;
 
 class ItemPolicy
@@ -14,7 +14,7 @@ class ItemPolicy
      */
     public function view(?User $user, Item $item): Response
     {
-        return $this->allowIfOwner($user, $item);
+        return $this->allowIfOwner($item);
     }
 
     /**
@@ -22,7 +22,7 @@ class ItemPolicy
      */
     public function update(?User $user, Item $item): Response
     {
-        return $this->allowIfOwner($user, $item);
+        return $this->allowIfOwner($item);
     }
 
     /**
@@ -30,23 +30,13 @@ class ItemPolicy
      */
     public function delete(?User $user, Item $item): Response
     {
-        return $this->allowIfOwner($user, $item);
+        return $this->allowIfOwner($item);
     }
 
-    private function allowIfOwner(?User $user, Item $item): Response
+    private function allowIfOwner(Item $item): Response
     {
-        if (GuestSession::isActive()) {
-            return $item->session_id === GuestSession::hashedSessionId()
-                ? Response::allow()
-                : Response::denyAsNotFound();
-        }
-
-        if ($user !== null) {
-            return $item->user_id === $user->id
-                ? Response::allow()
-                : Response::denyAsNotFound();
-        }
-
-        return Response::denyAsNotFound();
+        return ItemOwner::current()->owns($item)
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 }

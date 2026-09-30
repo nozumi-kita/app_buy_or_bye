@@ -15,11 +15,10 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('session_id')->nullable();
+            $table->string('hashed_session_id')->nullable();
             $table->string('name');
             $table->integer('price');
             $table->text('memo')->nullable();
-            $table->string('image_key');
             $table->string('status')->default('pending');
             $table->timestampTz('status_changed_at');
             $table->timestampsTz();
@@ -29,8 +28,8 @@ return new class extends Migration
 
         DB::statement('
             ALTER TABLE items ADD CONSTRAINT items_owner_id_check
-            CHECK ((user_id IS NOT NULL AND session_id IS NULL)
-            OR (user_id IS NULL AND session_id IS NOT NULL))   
+            CHECK ((user_id IS NOT NULL AND hashed_session_id IS NULL)
+            OR (user_id IS NULL AND hashed_session_id IS NOT NULL))   
         ');
     }
 

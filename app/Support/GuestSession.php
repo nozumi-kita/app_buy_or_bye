@@ -17,7 +17,7 @@ final class GuestSession
 
     public static function isActive(): bool
     {
-        return (! Auth::check() && Session::get(self::IS_GUEST)) === true;
+        return ! Auth::check() && Session::get(self::IS_GUEST);
     }
 
     public static function hashedSessionId(): ?string

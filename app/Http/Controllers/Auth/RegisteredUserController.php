@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
+use App\Support\GuestSession;
 use Illuminate\Support\Facades\Auth;
 
 class RegisteredUserController extends Controller
@@ -23,6 +24,7 @@ class RegisteredUserController extends Controller
         ]);
 
         Auth::login($user);
+        GuestSession::end();
 
         return redirect()->intended(route('items.index'));
     }

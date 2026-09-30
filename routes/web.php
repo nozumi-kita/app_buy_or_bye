@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\GuestSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ItemController;
+use App\Http\Middleware\EnsureAuthenticatedOrGuestSession;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/items');
@@ -10,7 +12,9 @@ Route::redirect('/', '/items');
 Route::controller(AuthenticatedSessionController::class)->group(function () {
     Route::get('/login', 'create')->middleware('guest')->name('login');
     Route::post('/login', 'store')->middleware('guest');
-    Route::post('/logout', 'destroy')->middleware('auth')->name('logout');
+    Route::post('/logout', 'destroy')
+        ->middleware([EnsureAuthenticatedOrGuestSession::class])
+        ->name('logout');
 });
 
 Route::controller(RegisteredUserController::class)->middleware('guest')->group(function () {
@@ -18,4 +22,10 @@ Route::controller(RegisteredUserController::class)->middleware('guest')->group(f
     Route::post('/register', 'store')->middleware('throttle:register');
 });
 
-Route::resource('items', ItemController::class)->middleware('auth')->where(['item' => '[0-9]+']);
+Route::post('/guest-login', GuestSessionController::class)
+    ->middleware('guest')
+    ->name('guest-login');
+
+Route::resource('items', ItemController::class)
+    ->middleware([EnsureAuthenticatedOrGuestSession::class])
+    ->where(['item' => '[0-9]+']);

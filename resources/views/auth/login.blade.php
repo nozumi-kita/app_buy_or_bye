@@ -38,6 +38,10 @@
             <button class="btn btn-primary" type="submit">ログイン</button>
         </form>
         <div class="auth-footer">
+            <form method="POST" action="{{ route('guest-login') }}">
+                @csrf
+                <button type="submit">ゲストログイン</button>
+            </form>
             <a href="{{ route('register') }}">アカウントをお持ちでない方はこちら</a>
         </div>
     </section>

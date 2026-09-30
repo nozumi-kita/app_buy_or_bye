@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Item;
 use App\Models\User;
+use App\Support\GuestSession;
 use Illuminate\Auth\Access\Response;
 
 class ItemPolicy
@@ -11,31 +12,41 @@ class ItemPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Item $item): Response
+    public function view(?User $user, Item $item): Response
     {
-        return $this->owns($user, $item);
+        return $this->allowIfOwner($user, $item);
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Item $item): Response
+    public function update(?User $user, Item $item): Response
     {
-        return $this->owns($user, $item);
+        return $this->allowIfOwner($user, $item);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Item $item): Response
+    public function delete(?User $user, Item $item): Response
     {
-        return $this->owns($user, $item);
+        return $this->allowIfOwner($user, $item);
     }
 
-    private function owns(User $user, Item $item): Response
+    private function allowIfOwner(?User $user, Item $item): Response
     {
-        return $user->id === $item->user_id
-            ? Response::allow()
-            : Response::denyAsNotFound();
+        if (GuestSession::isActive()) {
+            return $item->session_id === GuestSession::hashedSessionId()
+                ? Response::allow()
+                : Response::denyAsNotFound();
+        }
+
+        if ($user !== null) {
+            return $item->user_id === $user->id
+                ? Response::allow()
+                : Response::denyAsNotFound();
+        }
+
+        return Response::denyAsNotFound();
     }
 }

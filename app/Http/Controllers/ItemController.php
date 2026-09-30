@@ -6,6 +6,7 @@ use App\Enums\ItemStatus;
 use App\Http\Requests\Item\StoreItemRequest;
 use App\Http\Requests\Item\UpdateItemRequest;
 use App\Models\Item;
+use App\Support\GuestSession;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,14 @@ class ItemController extends Controller implements HasMiddleware
      */
     public function index()
     {
+        if (GuestSession::isActive()) {
+            return view('items.index', [
+                'items' => Item::where('session_id', GuestSession::hashedSessionId())
+                    ->orderBy('updated_at', 'DESC')
+                    ->get(),
+            ]);
+        }
+
         return view('items.index', [
             'items' => Auth::user()->items()->orderBy('updated_at', 'DESC')->get(),
         ]);
@@ -44,8 +53,19 @@ class ItemController extends Controller implements HasMiddleware
      */
     public function store(StoreItemRequest $request)
     {
+        if (GuestSession::isActive()) {
+            $hashedSessionId = GuestSession::hashedSessionId();
+            $userId = null;
+        }
+
+        if (Auth::check()) {
+            $hashedSessionId = null;
+            $userId = $request->user()->id;
+        }
+
         $item = new Item;
-        $item->user_id = $request->user()->id;
+        $item->user_id = $userId;
+        $item->session_id = $hashedSessionId;
         $item->name = $request->name();
         $item->price = $request->price();
         $item->memo = $request->memo();

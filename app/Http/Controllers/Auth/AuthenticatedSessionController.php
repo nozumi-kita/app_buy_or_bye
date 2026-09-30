@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Support\GuestSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -28,11 +29,10 @@ class AuthenticatedSessionController extends Controller
         }
 
         $request->clearFailedAttempts();
-
         $request->session()->regenerate();
+        GuestSession::end();
 
         return redirect()->intended(route('items.index'));
-
     }
 
     public function destroy(Request $request)

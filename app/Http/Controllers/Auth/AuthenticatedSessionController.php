@@ -13,7 +13,8 @@ class AuthenticatedSessionController extends Controller
 {
     public function create()
     {
-        return view('auth.login');
+        return view('auth.login')
+            ->with('guestLoggedIn', GuestSession::isActive());
     }
 
     public function store(LoginRequest $request)

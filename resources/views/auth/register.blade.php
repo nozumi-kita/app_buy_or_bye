@@ -1,5 +1,8 @@
 <x-layouts.guest>
     <section class="auth-card">
+        @if ($guestLoggedIn)
+            <a href="{{ route('items.index') }}">一覧に戻る</a>
+        @endif
         <h1 class="auth-title">ユーザー登録</h1>
         <form method="POST" action="{{ route('register') }}">
             @csrf

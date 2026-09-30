@@ -83,9 +83,40 @@ li {
     font-size: 24px;
 }
 
-.auth-footer {
-    margin-bottom: 10px;
+.form-login {
+    margin-bottom: 14px;
+    border-bottom: 1px solid #000;
+}
+
+.auth-guest-notice {
+    padding: 4px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.auth-guest-notice .items-link {
+    display: flex;
+    justify-content: center;
     text-align: center;
+    margin-bottom: 8px;
+}
+
+.auth-footer {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.btn-guest-login {
+    border-radius: 8px;
+    color: white;
+    border: none;
+    background: #888888;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 8px;
 }
 
 /* ヘッダー */

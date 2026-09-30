@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -45,5 +46,17 @@ final class ItemOwner
         }
 
         return false;
+    }
+
+    public function transferItemsTo(User $user): void
+    {
+        if ($this->hashedSessionId !== null) {
+            $this->items()
+                ->toBase()
+                ->update([
+                    'user_id' => $user->id,
+                    'hashed_session_id' => null,
+                ]);
+        }
     }
 }

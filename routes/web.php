@@ -24,6 +24,7 @@ Route::controller(RegisteredUserController::class)->middleware('guest')->group(f
 
 Route::post('/guest-login', GuestSessionController::class)
     ->middleware('guest')
+    ->middleware('throttle:guest-login')
     ->name('guest-login');
 
 Route::resource('items', ItemController::class)

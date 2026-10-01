@@ -35,4 +35,12 @@ class ItemFactory extends Factory
             'status_changed_at' => now(),
         ];
     }
+
+    public function guest(string $hashedSessionId): static
+    {
+        return $this->state(fn () => ([
+            'user_id' => null,
+            'hashed_session_id' => $hashedSessionId,
+        ]));
+    }
 }

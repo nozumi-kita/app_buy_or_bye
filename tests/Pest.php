@@ -1,7 +1,9 @@
 <?php
 
 use App\Enums\ItemStatus;
+use App\Support\GuestSession;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
 /*
@@ -43,4 +45,15 @@ function validItemDataUpdate(array $overrides = []): array
     return validItemData(array_merge([
         'status' => ItemStatus::Pending->value,
     ], $overrides));
+}
+
+function startGuestSession(): string
+{
+    test()->from(route('login'))
+        ->post(route('guest-login'))
+        ->assertRedirect(route('items.index'));
+
+    test()->withCookie(config('session.cookie'), Session::getId());
+
+    return GuestSession::hashedSessionId();
 }

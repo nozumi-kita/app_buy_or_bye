@@ -23,7 +23,7 @@ describe('ログインユーザー', function () {
                 ->assertSee('私のキーボード');
         });
 
-        test('他者の気になるものが一覧に表示されないこと', function () {
+        test('他のユーザーの気になるものが一覧に表示されないこと', function () {
             /** @var TestCase $this */
             Item::factory()->create(['name' => '他者のパソコン']);
 
@@ -31,6 +31,19 @@ describe('ログインユーザー', function () {
                 ->get(route('items.index'))
                 ->assertOk()
                 ->assertDontSee('他者のパソコン');
+        });
+
+        test('ゲストユーザーの気になるものが一覧に表示されないこと', function () {
+            /** @var TestCase $this */
+            Item::factory()->guest('guest-session-id')->create([
+                'name' => 'ゲストユーザーのアイテム',
+            ]);
+
+            $this->actingAs($this->user)
+                ->get(route('items.index'))
+                ->assertOk()
+                ->assertDontSee('ゲストユーザーのアイテム');
+
         });
 
         test('気になるものを1件も登録していない場合、「表示するものがありません」と表示されること', function () {
@@ -166,7 +179,7 @@ describe('ログインユーザー', function () {
                 ->assertSee('私のパソコン');
         });
 
-        test('他のユーザーの気になるものは閲覧できず、404エラーがでること', function () {
+        test('他のユーザーの気になるものは閲覧できず、404エラーとなること', function () {
             /** @var TestCase $this */
             $item = Item::factory()->create();
 
@@ -175,7 +188,18 @@ describe('ログインユーザー', function () {
                 ->assertNotFound();
         });
 
-        test('存在しない気になるものを閲覧しようとした場合、404エラーがでること', function ($value) {
+        test('ゲストユーザーの気になるものは閲覧できず、404エラーとなること', function () {
+            /** @var TestCase $this */
+            $item = Item::factory()->guest('guest-session-id')->create([
+                'name' => 'ゲストユーザーのアイテム',
+            ]);
+
+            $this->actingAs($this->user)
+                ->get(route('items.show', $item))
+                ->assertNotFound();
+        });
+
+        test('存在しない気になるものを閲覧しようとした場合、404エラーとなること', function ($value) {
             /** @var TestCase $this */
             $this->actingAs($this->user)
                 ->get(route('items.show', $value))
@@ -207,7 +231,7 @@ describe('ログインユーザー', function () {
                 ]);
         });
 
-        test('他のユーザーの気になるものは閲覧できず、404エラーがでること', function () {
+        test('他のユーザーの気になるものは閲覧できず、404エラーとなること', function () {
             /** @var TestCase $this */
             $item = Item::factory()->create();
 
@@ -216,7 +240,18 @@ describe('ログインユーザー', function () {
                 ->assertNotFound();
         });
 
-        test('存在しない気になるものを閲覧しようとした場合、404エラーがでること', function ($value) {
+        test('ゲストユーザーの気になるものは閲覧できず、404エラーとなること', function () {
+            /** @var TestCase $this */
+            $item = Item::factory()->guest('guest-session-id')->create([
+                'name' => 'ゲストユーザーのアイテム',
+            ]);
+
+            $this->actingAs($this->user)
+                ->get(route('items.edit', $item))
+                ->assertNotFound();
+        });
+
+        test('存在しない気になるものを閲覧しようとした場合、404エラーとなること', function ($value) {
             /** @var TestCase $this */
             $this->actingAs($this->user)
                 ->get(route('items.edit', $value))
@@ -230,6 +265,7 @@ describe('ログインユーザー', function () {
     describe('更新', function () {
         beforeEach(function () {
             $this->item = Item::factory()->for($this->user)->create([
+                'memo' => 'テストです',
                 'status' => ItemStatus::Pending,
                 'status_changed_at' => now()->subDay(),
             ]);
@@ -333,21 +369,39 @@ describe('ログインユーザー', function () {
             'ステータスにEnumで指定した値以外を入れている' => [['status' => 'invalid'], ['status']],
         ]);
 
-        test('他者の気になるものは更新できず、404エラーとなること', function () {
+        test('他のユーザーの気になるものは更新できず、404エラーとなること', function () {
             /** @var TestCase $this */
             $item = Item::factory()->create(['name' => '他人のパソコン']);
 
             $this->actingAs($this->user)
-                ->put(route('items.update', $item), validItemDataUpdate(['name' => '私のパソコン']))
+                ->put(route('items.update', $item), validItemDataUpdate([
+                    'name' => '私のパソコン',
+                ]))
                 ->assertNotFound();
 
-            $this->assertDatabaseHas(Item::class, [
-                'id' => $item->id,
-                'name' => '他人のパソコン',
-            ]);
+            $item->refresh();
+
+            expect($item->name)->toBe('他人のパソコン');
         });
 
-        test('存在しない気になるものを更新しようとした場合、404エラーがでること', function ($value) {
+        test('ゲストユーザーの気になるものは更新できず、404エラーとなること', function () {
+            /** @var TestCase $this */
+            $item = Item::factory()->guest('guest-session-id')->create([
+                'name' => 'ゲストユーザーのアイテム',
+            ]);
+
+            $this->actingAs($this->user)
+                ->put(route('items.update', $item), validItemDataUpdate([
+                    'name' => '私のアイテム',
+                ]))
+                ->assertNotFound();
+
+            $item->refresh();
+
+            expect($item->name)->toBe('ゲストユーザーのアイテム');
+        });
+
+        test('存在しない気になるものを更新しようとした場合、404エラーとなること', function ($value) {
             /** @var TestCase $this */
             $this->actingAs($this->user)
                 ->put(route('items.update', $value))
@@ -374,7 +428,7 @@ describe('ログインユーザー', function () {
             $this->assertModelMissing($this->item);
         });
 
-        test('他者の気になるものを削除できないこと', function () {
+        test('他のユーザーの気になるものを削除できないこと', function () {
             /** @var TestCase $this */
             $item = Item::factory()->create();
 
@@ -385,7 +439,18 @@ describe('ログインユーザー', function () {
             $this->assertModelExists($item);
         });
 
-        test('存在しない気になるものを削除しようとした場合、404エラーがでること', function ($value) {
+        test('ゲストユーザーの気になるものを削除できないこと', function () {
+            /** @var TestCase $this */
+            $item = Item::factory()->guest('guest-hashed-session')->create();
+
+            $this->actingAs($this->user)
+                ->delete(route('items.destroy', $item))
+                ->assertNotFound();
+
+            $this->assertModelExists($item);
+        });
+
+        test('存在しない気になるものを削除しようとした場合、404エラーとなること', function ($value) {
             /** @var TestCase $this */
             $this->actingAs($this->user)
                 ->delete(route('items.destroy', $value))
@@ -443,9 +508,26 @@ describe('ログインユーザー', function () {
                 ->assertSessionMissing('success');
         });
     });
+
+    describe('ヘッダー', function () {
+        test('認証済みユーザー向けの表示になっており、ゲストユーザー向けの表示がされていないこと', function () {
+            /** @var TestCase $this */
+            $this->actingAs($this->user)
+                ->get(route('items.index'))
+                ->assertOk()
+                ->assertSee([
+                    '実績',
+                    '設定',
+                    'ログアウト',
+                ])->assertDontSee([
+                    'データを引き継いでアカウント作成',
+                    'ゲストログイン終了',
+                ]);
+        });
+    });
 });
 
-describe('未ログイン', function () {
+describe('未認証(ログインユーザーでもゲストユーザーでもない)', function () {
     test('一覧・登録画面、新規登録にアクセスを試みると、ログイン画面にリダイレクトされること', function (string $method, string $routeName) {
         /** @var TestCase $this */
         $this->{$method}(route($routeName))
@@ -456,16 +538,22 @@ describe('未ログイン', function () {
         '登録' => ['post', 'items.store'],
     ]);
 
-    test('詳細・編集画面へのアクセスを試みた場合、ログイン画面にリダイレクトされること', function (string $method, string $routeName) {
+    test('詳細・編集画面へのアクセスを試みた場合、ログイン画面にリダイレクトされること', function (string $routeName) {
         /** @var TestCase $this */
         $item = Item::factory()->create();
 
-        $this->{$method}(route($routeName, $item))
+        $this->get(route($routeName, $item))
             ->assertRedirect(route('login'));
     })->with([
-        '詳細画面' => ['get', 'items.show'],
-        '編集画面' => ['get', 'items.edit'],
+        '詳細画面' => ['items.show'],
+        '編集画面' => ['items.edit'],
     ]);
+
+    test('存在しない「気になるもの」の詳細へのアクセスを試みると、ログイン画面にリダイレクトされること', function () {
+        /** @var TestCase $this */
+        $this->get(route('items.show', 99999))
+            ->assertRedirect(route('login'));
+    });
 
     test('更新を試みるとログイン画面にリダイレクトされること', function () {
         /** @var TestCase $this */

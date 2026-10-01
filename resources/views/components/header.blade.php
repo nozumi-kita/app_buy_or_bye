@@ -14,14 +14,14 @@
                 </li>
             @else
                 <li class="nav-item">
-                    <a href="{{ route('register') }}">データを引き継いでアカウント作成</a>
+                    <a class="account-create-link" href="{{ route('register') }}">データを引き継いでアカウント作成</a>
                 </li>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button class="btn btn-logout" type="submit"
                             onclick="return confirm('ゲストログインを終了すると、登録したデータは二度と表示できません。よろしいですか？')"
-                        >ゲストログインを終了</button>
+                        >ゲストログイン終了</button>
                     </form>
                 </li>
             @endauth

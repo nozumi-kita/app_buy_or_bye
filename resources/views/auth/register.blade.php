@@ -68,8 +68,10 @@
             </div>
             <button class="btn btn-primary" type="submit">登録</button>
         </form>
-        <div class="auth-footer">
-            <a href="{{ route('login') }}">アカウントをお持ちの方はこちら</a>
-        </div>
+        @if (!$guestLoggedIn)
+            <div class="auth-footer">
+                <a href="{{ route('login') }}">アカウントをお持ちの方はこちら</a>
+            </div>
+        @endif
     </section>
 </x-layouts.guest>

@@ -29,4 +29,4 @@ Route::post('/guest-login', GuestSessionController::class)
 
 Route::resource('items', ItemController::class)
     ->middleware([EnsureAuthenticatedOrGuestSession::class])
-    ->where(['item' => '[0-9]+']);
+    ->whereNumber('item');

@@ -4,7 +4,6 @@ namespace App\Support;
 
 use App\Enums\ItemStatus;
 use Carbon\CarbonImmutable;
-use Carbon\CarbonInterface;
 
 final class ItemTotals
 {
@@ -76,7 +75,7 @@ final class ItemTotals
     private static function startOfThisWeek(): CarbonImmutable
     {
         return CarbonImmutable::now(config('app.display_timezone'))
-            ->startOfWeek(CarbonInterface::MONDAY)
+            ->startOfWeek(CarbonImmutable::MONDAY)
             ->utc();
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-// Authenticateミドルウェアと同じ優先順位にするため、AuthenticatesRequestをマーカーインターフェースとして実装。
+// Authenticateミドルウェアと同じ優先順位にするため、AuthenticatesRequestsをマーカーインターフェースとして実装。
 class EnsureAuthenticatedOrGuestSession implements AuthenticatesRequests
 {
     /**

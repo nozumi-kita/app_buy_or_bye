@@ -16,7 +16,7 @@
             </div>
             <div class="item-detail-content">
                 <dt class="item-detail-label">更新日時</dt>
-                <dd class="item-detail-value">{{ $item->updated_at->format('Y/m/d H:i') }}</dd>
+                <dd class="item-detail-value">{{ format_jst($item->updated_at) }}</dd>
             </div>
             <div class="item-detail-content">
                 <dt class="item-detail-label">ステータス</dt>

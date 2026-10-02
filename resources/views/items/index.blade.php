@@ -1,5 +1,6 @@
 <x-layouts.app>
     <section>
+        <x-items.item-price-totals />
         <div class="item-list-header">
             <h2>気になるもの一覧</h2>
             <a class="link-register" href="{{ route('items.create') }}">気になるものを登録</a>
@@ -24,7 +25,7 @@
                         <dl class="item-contents">
                             <div class="item-content">
                                 <dt class="item-content-label">価格</dt>
-                                <dd class="item-content-value">{{ Number::currency($item->price, in: 'JPY') }}</dd>
+                                <dd class="item-content-value">{{ format_jpy($item->price) }}</dd>
                             </div>
                             <div class="item-content">
                                 <dt class="item-content-label">メモ</dt>
@@ -32,7 +33,7 @@
                             </div>
                             <div class="item-content">
                                 <dt class="item-content-label">更新日時</dt>
-                                <dd class="item-content-value">{{ $item->updated_at->format('Y/m/d H:i') }}</dd>
+                                <dd class="item-content-value">{{ format_jst($item->updated_at) }}</dd>
                             </div>
                         </dl>
                         <div class="edit-link">

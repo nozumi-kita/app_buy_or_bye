@@ -6,9 +6,9 @@ use App\Enums\ItemStatus;
 use App\Http\Requests\Item\StoreItemRequest;
 use App\Http\Requests\Item\UpdateItemRequest;
 use App\Models\Item;
+use App\Support\ItemOwner;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller implements HasMiddleware
 {
@@ -26,8 +26,10 @@ class ItemController extends Controller implements HasMiddleware
      */
     public function index()
     {
+        $items = ItemOwner::current()->items();
+
         return view('items.index', [
-            'items' => Auth::user()->items()->orderBy('updated_at', 'DESC')->get(),
+            'items' => $items->orderBy('updated_at', 'DESC')->get(),
         ]);
     }
 
@@ -44,12 +46,14 @@ class ItemController extends Controller implements HasMiddleware
      */
     public function store(StoreItemRequest $request)
     {
+        $itemOwner = ItemOwner::current();
+
         $item = new Item;
-        $item->user_id = $request->user()->id;
+        $item->user_id = $itemOwner->userId;
+        $item->hashed_session_id = $itemOwner->hashedSessionId;
         $item->name = $request->name();
         $item->price = $request->price();
         $item->memo = $request->memo();
-        $item->image_key = 'default';
         $item->status = ItemStatus::Pending;
         $item->status_changed_at = now();
 

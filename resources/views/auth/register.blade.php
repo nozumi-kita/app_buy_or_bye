@@ -1,5 +1,8 @@
 <x-layouts.guest>
     <section class="auth-card">
+        @if ($guestLoggedIn)
+            <a href="{{ route('items.index') }}">一覧に戻る</a>
+        @endif
         <h1 class="auth-title">ユーザー登録</h1>
         <form method="POST" action="{{ route('register') }}">
             @csrf
@@ -65,8 +68,10 @@
             </div>
             <button class="btn btn-primary" type="submit">登録</button>
         </form>
-        <div class="auth-footer">
-            <a href="{{ route('login') }}">アカウントをお持ちの方はこちら</a>
-        </div>
+        @if (!$guestLoggedIn)
+            <div class="auth-footer">
+                <a href="{{ route('login') }}">アカウントをお持ちの方はこちら</a>
+            </div>
+        @endif
     </section>
 </x-layouts.guest>

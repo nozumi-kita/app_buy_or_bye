@@ -30,10 +30,17 @@ class ItemFactory extends Factory
                 'マウス',
             ]),
             'price' => fake()->numberBetween(5000, 50000),
-            'image_key' => 'default',
             'memo' => fake()->realText(50, 5),
             'status' => ItemStatus::Pending,
             'status_changed_at' => now(),
         ];
+    }
+
+    public function guest(string $hashedSessionId): static
+    {
+        return $this->state(fn () => ([
+            'user_id' => null,
+            'hashed_session_id' => $hashedSessionId,
+        ]));
     }
 }

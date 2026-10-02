@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Item;
 use App\Models\User;
+use App\Support\ItemOwner;
 use Illuminate\Auth\Access\Response;
 
 class ItemPolicy
@@ -11,30 +12,30 @@ class ItemPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Item $item): Response
+    public function view(?User $user, Item $item): Response
     {
-        return $this->owns($user, $item);
+        return $this->allowIfOwner($item);
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Item $item): Response
+    public function update(?User $user, Item $item): Response
     {
-        return $this->owns($user, $item);
+        return $this->allowIfOwner($item);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Item $item): Response
+    public function delete(?User $user, Item $item): Response
     {
-        return $this->owns($user, $item);
+        return $this->allowIfOwner($item);
     }
 
-    private function owns(User $user, Item $item): Response
+    private function allowIfOwner(Item $item): Response
     {
-        return $user->id === $item->user_id
+        return ItemOwner::current()->owns($item)
             ? Response::allow()
             : Response::denyAsNotFound();
     }

@@ -384,6 +384,11 @@ li {
     padding: 0 10px;
 }
 
+.totals-title {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
 .totals-main {
     border-bottom: 1px solid #000;
 }

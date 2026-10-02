@@ -1,6 +1,6 @@
 <x-layouts.app>
     <section>
-        <x-items.item-price-totals />
+        <x-items.item-totals :$totals />
         <div class="item-list-header">
             <h2>気になるもの一覧</h2>
             <a class="link-register" href="{{ route('items.create') }}">気になるものを登録</a>

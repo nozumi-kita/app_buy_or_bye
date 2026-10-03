@@ -20,7 +20,9 @@ class Medal extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany((User::class))->withPivot('acquired_at');
+        return $this->belongsToMany((User::class))
+            ->withPivot('acquired_at')
+            ->withTimestamps();
     }
 
     public function iconUrl()

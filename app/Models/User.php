@@ -56,6 +56,8 @@ class User extends Authenticatable
 
     public function medals(): BelongsToMany
     {
-        return $this->belongsToMany(Medal::class)->withPivot('acquired_at');
+        return $this->belongsToMany(Medal::class)
+            ->withPivot('acquired_at')
+            ->withTimestamps();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medal;
+use App\Support\MedalProgress;
 use Illuminate\Http\Request;
 
 class MedalController extends Controller
@@ -14,6 +15,7 @@ class MedalController extends Controller
     {
         return view('medals.index', [
             'medals' => Medal::orderBy('display_order', 'asc')->get(),
+            'progress' => MedalProgress::for($request->user()),
         ]);
     }
 }

@@ -439,12 +439,14 @@ li {
 }
 
 .medal-card {
+    display: flex;
+    flex-direction: column;
     width: 32%;
     margin: 0 2% 2% 0;
     border: 1px solid #000;
     border-radius: 8px;
     padding: 0 10px;
-    height: 250px;
+    height: 280px;
 }
 
 .medal-list .medal-card:nth-child(3n) {
@@ -453,12 +455,12 @@ li {
 
 .medal-title {
     text-align: center;
-    margin: 8px 0;
+    margin: 12px 0;
 }
 
 .medal-image {
     display: block;
-    margin: 0 auto;
+    margin: 10px auto;
     height: 100px;
     width: 100px;
 }
@@ -471,6 +473,16 @@ li {
 .medal-acquired {
     text-align: center;
     margin: 8px 0;
+}
+
+.progress-bar {
+    margin-top: auto;
+    align-self: center;
+}
+
+.progress-value {
+    text-align: center;
+    margin: 0 0 8px;
 }
 
 /* ------------------------

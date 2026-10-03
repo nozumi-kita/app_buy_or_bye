@@ -7,6 +7,7 @@ use App\Http\Requests\Item\StoreItemRequest;
 use App\Http\Requests\Item\UpdateItemRequest;
 use App\Models\Item;
 use App\Support\ItemOwner;
+use App\Support\ItemTotals;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -26,10 +27,13 @@ class ItemController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        $items = ItemOwner::current()->items();
+        $itemOwner = ItemOwner::current();
+
+        $items = $itemOwner->items();
 
         return view('items.index', [
             'items' => $items->orderBy('updated_at', 'DESC')->get(),
+            'totals' => ItemTotals::for($itemOwner),
         ]);
     }
 

@@ -377,6 +377,49 @@ li {
     opacity: 0.7;
 }
 
+/* 各ステータス合計 */
+.totals {
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 0 10px;
+}
+
+.totals-title {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.totals-main {
+    border-bottom: 1px solid #000;
+}
+
+.totals-amounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.totals-amount {
+    margin: 10px 0;
+}
+
+.totals-amount.totals-amount-this-week,
+.totals-amount.totals-amount-all {
+    font-size: 24px;
+}
+
+.totals-amount-results {
+    display: flex;
+}
+
+.totals-sub {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.totals-amount-count {
+    margin-right: 10px;
+}
+
 /* ------------------------
 スマートフォン
 ------------------------- */

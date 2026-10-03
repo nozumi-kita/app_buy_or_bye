@@ -3,6 +3,7 @@
 use App\Enums\ItemStatus;
 use App\Models\Item;
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use Tests\TestCase;
 
 describe('ログインユーザー', function () {
@@ -21,6 +22,23 @@ describe('ログインユーザー', function () {
                 ->assertOk()
                 ->assertViewIs('items.index')
                 ->assertSee('私のキーボード');
+        });
+
+        test('更新日時がDBにはUTCで保存され、画面には日本時間で表示されること', function () {
+            /** @var TestCase $this */
+            $this->travelTo(CarbonImmutable::parse('2026-09-14 00:30:00', 'Asia/Tokyo'));
+
+            $item = Item::factory()->for($this->user)->create();
+
+            $this->assertDatabaseHas(Item::class, [
+                'id' => $item->id,
+                'updated_at' => '2026-09-13 15:30:00+00',
+            ]);
+
+            $this->actingAs($this->user)
+                ->get(route('items.index'))
+                ->assertSee('2026/09/14 00:30')
+                ->assertDontSee('2026/09/13 15:30');
         });
 
         test('他のユーザーの気になるものが一覧に表示されないこと', function () {
@@ -177,6 +195,18 @@ describe('ログインユーザー', function () {
                 ->assertViewIs('items.show')
                 ->assertViewHas('item', $item)
                 ->assertSee('私のパソコン');
+        });
+
+        test('更新日時が日本時間で表示されること', function () {
+            /** @var TestCase $this */
+            $this->travelTo(CarbonImmutable::parse('2026-09-14 00:30:00', 'Asia/Tokyo'));
+
+            Item::factory()->for($this->user)->create();
+
+            $this->actingAs($this->user)
+                ->get(route('items.index'))
+                ->assertSee('2026/09/14 00:30')
+                ->assertDontSee('2026/09/13 15:30');
         });
 
         test('他のユーザーの気になるものは閲覧できず、404エラーとなること', function () {

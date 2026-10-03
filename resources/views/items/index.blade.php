@@ -20,7 +20,7 @@
                                     {{ $item->name }}
                                 </a>
                             </h3>
-                            <span class="status-badge">{{ $item->status->label() }}</span>
+                            <p class="status-badge">{{ $item->status->label() }}</p>
                         </div>
                         <dl class="item-contents">
                             <div class="item-content">

@@ -204,7 +204,7 @@ li {
     inset: 0;
 }
 
-.item-list li:nth-child(3n) {
+.item-list .item-card:nth-child(3n) {
     margin-right: 0;
 }
 
@@ -416,19 +416,83 @@ li {
     grid-template-columns: 1fr 1fr;
 }
 
+.totals-amount-label {
+    margin: 0;
+}
+
 .totals-amount-count {
-    margin-right: 10px;
+    margin: 0 10px 0 0;
+    padding: 0;
+}
+
+.totals-amount-value {
+    margin: 0;
+    padding: 0;
+}
+
+/* 実績 */
+.medal-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.medal-card {
+    width: 32%;
+    margin: 0 2% 2% 0;
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 0 10px;
+    height: 250px;
+}
+
+.medal-list .medal-card:nth-child(3n) {
+    margin-right: 0;
+}
+
+.medal-title {
+    text-align: center;
+    margin: 8px 0;
+}
+
+.medal-image {
+    display: block;
+    margin: 0 auto;
+    height: 100px;
+    width: 100px;
+}
+
+.medal-description {
+    text-align: center;
+    margin: 8px 0;
+}
+
+.medal-acquired {
+    text-align: center;
+    margin: 8px 0;
 }
 
 /* ------------------------
 スマートフォン
 ------------------------- */
 @media screen and (max-width: 767px) {
+    /* 一覧画面 */
     .item-list {
         flex-direction: column;
     }
 
     .item-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* 実績画面 */
+    .medal-list {
+        flex-direction: column;
+    }
+
+    .medal-card {
         width: 100%;
         margin-bottom: 20px;
     }

@@ -1,11 +1,13 @@
 <header class="header container">
-    <h1 class="logo">Buy or Bye</h1>
+    <h1 class="title-logo"><a href="{{ route('items.index') }}"><img class="logo-image"
+                src="{{ asset('images/app-logo.svg') }}" alt="Buy or Bye"
+            ></a></h1>
     <nav class="nav">
         <ul class="nav-list">
             <li class="nav-item"><a class="nav-link" href="{{ route('items.index') }}">気になるもの</a></li>
             @auth
                 <li class="nav-item"><a class="nav-link" href="{{ route('medals') }}">実績</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">設定</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('settings.index') }}">設定</a></li>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

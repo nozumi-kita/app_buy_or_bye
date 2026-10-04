@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\GuestSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MedalController;
+use App\Http\Controllers\SettingController;
 use App\Http\Middleware\EnsureAuthenticatedOrGuestSession;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +37,13 @@ Route::resource('items', ItemController::class)
 Route::get('/medals', MedalController::class)
     ->middleware('auth')
     ->name('medals');
+
+Route::controller(SettingController::class)->middleware('auth')->group(function () {
+    Route::get('/settings', 'index')->name('settings.index');
+});
+
+Route::controller(AccountController::class)->middleware('auth')->group(function () {
+    Route::delete('/settings', 'destroy')
+        ->middleware('throttle:account.destroy')
+        ->name('account.destroy');
+});

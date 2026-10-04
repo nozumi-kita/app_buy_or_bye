@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\GuestSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\MedalController;
 use App\Http\Middleware\EnsureAuthenticatedOrGuestSession;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,7 @@ Route::post('/guest-login', GuestSessionController::class)
 Route::resource('items', ItemController::class)
     ->middleware([EnsureAuthenticatedOrGuestSession::class])
     ->whereNumber('item');
+
+Route::get('/medals', MedalController::class)
+    ->middleware('auth')
+    ->name('medals');

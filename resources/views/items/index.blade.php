@@ -8,6 +8,9 @@
         @if (session('success'))
             <p class="flash flash-success">{{ session('success') }}</p>
         @endif
+        @foreach (session('awardedMedalNames', []) as $medalName)
+            <p class="flash flash-award"><span>実績:「{{ $medalName }}」を達成しました！</span></p>
+        @endforeach
         @if ($items->isEmpty())
             <p>表示するものがありません</p>
         @else
@@ -20,7 +23,7 @@
                                     {{ $item->name }}
                                 </a>
                             </h3>
-                            <span class="status-badge">{{ $item->status->label() }}</span>
+                            <p class="status-badge">{{ $item->status->label() }}</p>
                         </div>
                         <dl class="item-contents">
                             <div class="item-content">

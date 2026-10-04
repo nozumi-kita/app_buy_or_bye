@@ -8,6 +8,8 @@ use App\Http\Requests\Item\UpdateItemRequest;
 use App\Models\Item;
 use App\Support\ItemOwner;
 use App\Support\ItemTotals;
+use App\Support\MedalAwarder;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -66,6 +68,7 @@ class ItemController extends Controller implements HasMiddleware
         return to_route('items.index')
             ->with([
                 'success' => '登録が完了しました',
+                'awardedMedalNames' => $this->awardMedal($request),
             ]);
     }
 
@@ -106,6 +109,7 @@ class ItemController extends Controller implements HasMiddleware
 
         return to_route('items.index')->with([
             'success' => '更新が完了しました',
+            'awardedMedalNames' => $this->awardMedal($request),
         ]);
     }
 
@@ -119,5 +123,12 @@ class ItemController extends Controller implements HasMiddleware
         return to_route('items.index')->with([
             'success' => '削除が完了しました',
         ]);
+    }
+
+    private function awardMedal(Request $request): array
+    {
+        $user = $request->user();
+
+        return $user ? MedalAwarder::awardFor($user)->pluck('name')->all() : [];
     }
 }

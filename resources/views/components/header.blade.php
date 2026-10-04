@@ -4,7 +4,7 @@
         <ul class="nav-list">
             <li class="nav-item"><a class="nav-link" href="{{ route('items.index') }}">気になるもの</a></li>
             @auth
-                <li class="nav-item"><a class="nav-link" href="#">実績</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('medals') }}">実績</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">設定</a></li>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">

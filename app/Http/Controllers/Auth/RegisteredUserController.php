@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Support\GuestSession;
 use App\Support\ItemOwner;
+use App\Support\MedalAwarder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -34,9 +35,12 @@ class RegisteredUserController extends Controller
             return $user;
         });
 
+        $awardedMedalNames = MedalAwarder::awardFor($user)->pluck('name')->all();
+
         Auth::login($user);
         GuestSession::end();
 
-        return redirect()->intended(route('items.index'));
+        return redirect()->intended(route('items.index'))
+            ->with('awardedMedalNames', $awardedMedalNames);
     }
 }

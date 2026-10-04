@@ -57,6 +57,9 @@ li {
     background-color: #26e452;
 }
 
+.flash-award {
+    background-color: #267fe4;
+}
 /* 認証画面 */
 .auth {
     display: flex;
@@ -204,7 +207,7 @@ li {
     inset: 0;
 }
 
-.item-list li:nth-child(3n) {
+.item-list .item-card:nth-child(3n) {
     margin-right: 0;
 }
 
@@ -416,19 +419,101 @@ li {
     grid-template-columns: 1fr 1fr;
 }
 
+.totals-amount-label {
+    margin: 0;
+}
+
 .totals-amount-count {
-    margin-right: 10px;
+    margin: 0 10px 0 0;
+    padding: 0;
+}
+
+.totals-amount-value {
+    margin: 0;
+    padding: 0;
+}
+
+/* 実績 */
+.medal-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.medal-card {
+    display: flex;
+    flex-direction: column;
+    width: 32%;
+    margin: 0 2% 2% 0;
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 0 10px;
+    height: 280px;
+}
+
+.medal-list .medal-card:nth-child(3n) {
+    margin-right: 0;
+}
+
+.medal-title {
+    text-align: center;
+    margin: 12px 0;
+}
+
+.medal-image {
+    display: block;
+    margin: 10px auto;
+    height: 100px;
+    width: 100px;
+}
+
+.is-locked {
+    filter: grayscale(1);
+    opacity: 0.7;
+}
+
+.medal-description {
+    text-align: center;
+    margin: 8px 0;
+}
+
+.medal-acquired {
+    text-align: center;
+    margin-top: auto;
+}
+
+.progress-bar {
+    margin-top: auto;
+    align-self: center;
+    padding: 8px;
+}
+
+.progress-value {
+    text-align: center;
+    margin: 0 0 8px;
 }
 
 /* ------------------------
 スマートフォン
 ------------------------- */
 @media screen and (max-width: 767px) {
+    /* 一覧画面 */
     .item-list {
         flex-direction: column;
     }
 
     .item-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* 実績画面 */
+    .medal-list {
+        flex-direction: column;
+    }
+
+    .medal-card {
         width: 100%;
         margin-bottom: 20px;
     }

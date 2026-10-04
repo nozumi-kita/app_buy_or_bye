@@ -57,6 +57,9 @@ li {
     background-color: #26e452;
 }
 
+.flash-award {
+    background-color: #267fe4;
+}
 /* 認証画面 */
 .auth {
     display: flex;
@@ -465,6 +468,11 @@ li {
     width: 100px;
 }
 
+.is-locked {
+    filter: grayscale(1);
+    opacity: 0.7;
+}
+
 .medal-description {
     text-align: center;
     margin: 8px 0;
@@ -472,12 +480,13 @@ li {
 
 .medal-acquired {
     text-align: center;
-    margin: 8px 0;
+    margin-top: auto;
 }
 
 .progress-bar {
     margin-top: auto;
     align-self: center;
+    padding: 8px;
 }
 
 .progress-value {

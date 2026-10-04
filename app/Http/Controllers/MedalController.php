@@ -13,9 +13,11 @@ class MedalController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $user = $request->user();
+
         return view('medals.index', [
-            'medals' => Medal::orderBy('display_order', 'asc')->get(),
-            'progress' => MedalProgress::for($request->user()),
+            'medals' => Medal::withAcquiredAtFor($user)->orderBy('display_order', 'asc')->get(),
+            'progress' => MedalProgress::for($user),
         ]);
     }
 }

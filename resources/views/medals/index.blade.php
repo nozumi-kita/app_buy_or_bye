@@ -4,20 +4,20 @@
         <ul class="medal-list">
             @foreach ($medals as $medal)
                 <li class="medal-card">
-                    <h3 class="medal-title">{{ $medal->name }}</h3>
-                    <img class="medal-image" src="{{ $medal->iconUrl() }}" alt="{{ $medal->name }}">
+                    <h3 class="medal-title {{ $medal->isAcquired() ? '' : 'is-locked' }}">{{ $medal->name }}</h3>
+                    <img class="medal-image {{ $medal->isAcquired() ? '' : 'is-locked' }}" src="{{ $medal->iconUrl() }}"
+                        alt="{{ $medal->name }}"
+                    >
                     <p class="medal-description">{{ $medal->description }}</p>
-                    @if ($progress->satisfies($medal))
-                        <p class="medal-acquired">達成日 2026/9/23</p>
+                    @if ($medal->isAcquired())
+                        <p class="medal-acquired">達成日: {{ format_jst($medal->acquired_at, 'Y/m/d') }}</p>
                     @else
                         @php($type = $medal->condition_type)
                         <progress class="progress-bar" max="{{ $medal->threshold }}"
                             value="{{ $progress->valueOf($type) }}"
                         ></progress>
                         <p class="progress-value">
-                            <span>{{ $type->format($progress->valueOf($type)) }}</span>
-                            <span>/</span>
-                            <span>{{ $type->format($medal->threshold) }}</span>
+                            {{ $type->format($progress->valueOf($type)) }}/{{ $type->format($medal->threshold) }}
                         </p>
                     @endif
                 </li>

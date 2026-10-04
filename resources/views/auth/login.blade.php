@@ -1,5 +1,8 @@
 <x-layouts.guest>
     <section class="auth-card">
+        @if (session('success'))
+            <p class="flash flash-success">{{ session('success') }}</p>
+        @endif
         <h1 class="auth-title">ログイン</h1>
         <form class="form-login" method="POST" action="{{ route('login') }}">
             @csrf

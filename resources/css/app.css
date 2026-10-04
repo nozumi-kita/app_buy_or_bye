@@ -41,6 +41,15 @@ li {
     width: 100px;
 }
 
+.title-logo {
+    margin: 10px 10px 10px 0;
+}
+
+.logo-image {
+    height: 80px;
+    width: 80px;
+}
+
 /* フラッシュメッセージ */
 .flash {
     display: flex;
@@ -492,6 +501,62 @@ li {
 .progress-value {
     text-align: center;
     margin: 0 0 8px;
+}
+
+/* 設定画面 */
+.settings-detail {
+    width: min(100%, 450px);
+    border: solid 1px #000;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 0 auto;
+}
+
+.settings-detail-content {
+    display: flex;
+    margin-bottom: 50px;
+    border-bottom: 1px solid #000;
+}
+
+.settings-detail-label {
+    flex: 0 0 8em;
+}
+
+.settings-detail-value {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.account-form {
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.account-form-title {
+    margin: 8px 0 0px;
+}
+
+.account-form-label {
+    margin-bottom: 8px;
+}
+
+.form-input.account-delete {
+    margin-bottom: 12px;
+}
+
+.btn-account-delete {
+    border-radius: 8px;
+    color: white;
+    border: none;
+    background: #ff4d4d;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 4px;
 }
 
 /* ------------------------

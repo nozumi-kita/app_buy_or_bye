@@ -2,8 +2,11 @@
     <section>
         <x-items.item-totals :$totals />
         <div class="item-list-header">
-            <h2>気になるもの一覧</h2>
-            <a class="link-register" href="{{ route('items.create') }}">気になるものを登録</a>
+            <h2 class="items-title">気になるもの一覧</h2>
+            <div>
+                <a class="link-register" href="{{ route('items.create') }}">気になるものを登録</a>
+                <a class="link-register-sp" href="{{ route('items.create') }}" aria-label="気になるものを登録">+</a>
+            </div>
         </div>
         @if (session('success'))
             <p class="flash flash-success">{{ session('success') }}</p>

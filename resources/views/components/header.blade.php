@@ -1,8 +1,20 @@
 <header class="header container">
-    <h1 class="title-logo"><a href="{{ route('items.index') }}"><img class="logo-image"
-                src="{{ asset('images/app-logo.svg') }}" alt="Buy or Bye"
-            ></a></h1>
-    <nav class="nav">
+    <h1 class="title-logo">
+        <a href="{{ route('items.index') }}">
+            <img class="logo-image" src="{{ asset('images/app-logo.svg') }}" alt="Buy or Bye">
+        </a>
+    </h1>
+    <button
+        class="hamburger-menu"
+        aria-label="メニュー"
+        aria-expanded="false"
+        aria-controls="global-menu"
+    >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+    </button>
+    <nav class="nav" id="global-menu">
         <ul class="nav-list">
             <li class="nav-item"><a class="nav-link" href="{{ route('items.index') }}">気になるもの</a></li>
             @auth
@@ -11,7 +23,9 @@
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button class="btn btn-logout" type="submit">ログアウト</button>
+                        <button class="btn btn-logout" type="submit" onclick="return confirm('本当にログアウトしてよろしいですか？')">
+                            ログアウト
+                        </button>
                     </form>
                 </li>
             @else

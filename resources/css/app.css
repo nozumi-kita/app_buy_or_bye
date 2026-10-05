@@ -46,8 +46,8 @@ li {
 }
 
 .logo-image {
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
 }
 
 /* フラッシュメッセージ */
@@ -56,9 +56,9 @@ li {
     border: none;
     border-radius: 8px;
     color: #fff;
-    height: 40px;
+    padding: 10px 0;
     width: auto;
-    align-items: center;
+    text-align: center;
     justify-content: center;
 }
 
@@ -138,6 +138,10 @@ li {
     justify-content: space-between;
 }
 
+.hamburger-menu {
+    display: none;
+}
+
 .nav-list {
     display: flex;
     align-items: center;
@@ -182,6 +186,10 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.link-register-sp {
+    display: none;
 }
 
 .item-list {
@@ -389,7 +397,7 @@ li {
     opacity: 0.7;
 }
 
-/* 各ステータス合計 */
+/* ステータス別集計 */
 .totals {
     border: 1px solid #000;
     border-radius: 8px;
@@ -563,7 +571,153 @@ li {
 スマートフォン
 ------------------------- */
 @media screen and (max-width: 767px) {
+    /* ヘッダー */
+    .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 32px;
+        height: 24px;
+        padding: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .hamburger-menu .hamburger-bar {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #000;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger-menu.is-active .hamburger-bar:nth-child(1) {
+        transform: translateY(10px) rotate(45deg);
+    }
+
+    .hamburger-menu.is-active .hamburger-bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger-menu.is-active .hamburger-bar:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+
+    .nav {
+        display: none;
+        position: absolute;
+        top: 80px;
+        right: 0;
+        min-width: 200px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav.is-active {
+        display: block;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        padding: 0 10px;
+    }
+
+    .nav-list .nav-item {
+        margin-left: 0;
+    }
+
+    .nav-item {
+        margin-bottom: 8px;
+        width: 100%;
+    }
+
+    .account-create-link,
+    .account-create-link:hover {
+        color: #0066cc;
+        text-underline-offset: 0.2em;
+        background-color: #fff;
+        height: 24px;
+        text-decoration: underline;
+        padding: 0;
+        justify-content: left;
+        width: auto;
+    }
+
+    .account-create-link:hover {
+        color: #004499;
+        text-decoration-thickness: 2px;
+        opacity: 1;
+    }
+
+    .btn-logout {
+        color: #0066cc;
+        text-underline-offset: 0.2em;
+        background-color: #fff;
+        height: 24px;
+        text-decoration: underline;
+        text-align: left;
+        padding: 0;
+        width: auto;
+    }
+
+    .btn-logout:hover {
+        color: #004499;
+        text-decoration-thickness: 2px;
+        opacity: 1;
+    }
+
+    /* ステータス別集計 */
+    .totals {
+        margin-bottom: 10px;
+    }
+
+    .totals-amounts {
+        display: flex;
+        flex-direction: column;
+    }
+
     /* 一覧画面 */
+    .item-list-header {
+        margin-bottom: 10px;
+    }
+
+    .item-list {
+        padding-bottom: 60px;
+    }
+
+    .items-title {
+        margin: 0;
+    }
+
+    .link-register {
+        display: none;
+    }
+
+    .link-register-sp {
+        display: block;
+        color: #000;
+        background-color: #fff;
+        font-size: 24px;
+        text-decoration: none;
+        border: 1px solid #000;
+        border-radius: 8px;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 5;
+    }
+
+    .link-register-sp:hover {
+        color: #000;
+        background: #fff8f6;
+    }
+
     .item-list {
         flex-direction: column;
     }

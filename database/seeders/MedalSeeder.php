@@ -57,7 +57,7 @@ class MedalSeeder extends Seeder
             [
                 'code' => 'avoided_count_5',
                 'name' => '慣れてきた購入見送り',
-                'description' => '購入回避を5件達成する',
+                'description' => '購入を5件見送る',
                 'condition_type' => $avoidedCount,
                 'threshold' => 5,
                 'icon_key' => 'avoided_count_5',
@@ -65,8 +65,8 @@ class MedalSeeder extends Seeder
             ],
             [
                 'code' => 'avoided_count_10',
-                'name' => 'ついに２桁購入回避',
-                'description' => '購入回避を10件達成する',
+                'name' => 'ついに２桁、購入見送り',
+                'description' => '購入を10件見送る',
                 'condition_type' => $avoidedCount,
                 'threshold' => 10,
                 'icon_key' => 'avoided_count_10',

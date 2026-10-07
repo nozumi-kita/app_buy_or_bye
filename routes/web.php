@@ -43,6 +43,8 @@ Route::controller(SettingController::class)->middleware('auth')->group(function 
 });
 
 Route::controller(AccountController::class)->middleware('auth')->group(function () {
+    Route::get('/settings/edit', 'edit')->name('account.edit');
+    Route::put('/settings/update', 'update')->name('account.update');
     Route::delete('/settings', 'destroy')
         ->middleware('throttle:account.destroy')
         ->name('account.destroy');

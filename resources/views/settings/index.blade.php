@@ -1,7 +1,13 @@
 <x-layouts.app>
     <section class="settings-card">
         <div class="settings-detail">
-            <h2>設定</h2>
+            @if (session('success'))
+                <p class="flash flash-success">{{ session('success') }}</p>
+            @endif
+            <div class="settings-header">
+                <h2>設定</h2>
+                <a href="{{ route('account.edit') }}">編集</a>
+            </div>
             <dl>
                 <div class="settings-detail-content">
                     <dt class="settings-detail-label">ユーザー名</dt>

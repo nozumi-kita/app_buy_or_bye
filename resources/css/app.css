@@ -512,6 +512,12 @@ li {
 }
 
 /* 設定画面 */
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .settings-detail {
     width: min(100%, 450px);
     border: solid 1px #000;

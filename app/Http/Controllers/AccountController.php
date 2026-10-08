@@ -3,10 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Account\DeleteAccountRequest;
+use App\Http\Requests\Account\UpdateAccountRequest;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
+    public function edit()
+    {
+        $user = Auth::user();
+
+        return view('account.edit', [
+            'user' => $user,
+        ]);
+    }
+
+    public function update(UpdateAccountRequest $request)
+    {
+        $user = $request->user();
+        $user->name = $request->name();
+        $user->email = $request->email();
+
+        $user->save();
+
+        return to_route('settings.index')
+            ->with('success', 'アカウント情報の更新が完了しました');
+    }
+
     public function destroy(DeleteAccountRequest $request)
     {
         $user = $request->user();

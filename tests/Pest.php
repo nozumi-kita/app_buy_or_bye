@@ -57,3 +57,12 @@ function startGuestSession(): string
 
     return GuestSession::hashedSessionId();
 }
+
+function validAccountUpdateData(array $overrides = []): array
+{
+    return array_merge([
+        'name' => 'Test太郎',
+        'email' => 'test@example.com',
+        'password' => 'password',
+    ], $overrides);
+}

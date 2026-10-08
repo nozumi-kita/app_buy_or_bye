@@ -34,6 +34,7 @@ class UpdateAccountRequest extends FormRequest
                 'max:255',
                 Rule::unique('users')->ignore($this->user()->id),
             ],
+            'password' => ['required', 'current_password'],
         ];
     }
 

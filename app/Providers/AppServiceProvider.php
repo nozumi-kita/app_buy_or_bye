@@ -33,5 +33,9 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('account.destroy', function (Request $request) {
             return Limit::perMinute(5)->by($request->user()->id);
         });
+
+        RateLimiter::for('account.update', function (Request $request) {
+            return Limit::perMinute(5)->by($request->user()->id);
+        });
     }
 }

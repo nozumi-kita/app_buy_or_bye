@@ -12,7 +12,7 @@ class AccountController extends Controller
     {
         $user = Auth::user();
 
-        return view('settings.edit', [
+        return view('account.edit', [
             'user' => $user,
         ]);
     }

@@ -5,6 +5,7 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Email;
 use Illuminate\Validation\Rules\Password;
 use Override;
 
@@ -27,7 +28,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'max:255', 'unique:users', Email::defaults()],
             'password' => ['required', 'confirmed', Password::defaults()],
         ];
     }

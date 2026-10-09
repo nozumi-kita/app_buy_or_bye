@@ -24,7 +24,7 @@
                 @enderror
             </div>
             <div class="form-field">
-                <label class="form-label" for="price">価格</label>
+                <label class="form-label" for="price">価格(¥)</label>
                 <input
                     id="price"
                     class="form-input"

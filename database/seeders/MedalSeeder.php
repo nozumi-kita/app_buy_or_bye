@@ -75,7 +75,7 @@ class MedalSeeder extends Seeder
             [
                 'code' => 'avoided_amount_1000',
                 'name' => 'ちょっぴり見送り',
-                'description' => '購入を見送った金額が1,000円を超える',
+                'description' => '購入を見送った金額が1,000円に到達する',
                 'condition_type' => $amount,
                 'threshold' => 1000,
                 'icon_key' => 'avoided_amount_1000',
@@ -84,7 +84,7 @@ class MedalSeeder extends Seeder
             [
                 'code' => 'avoided_amount_5000',
                 'name' => 'なかなかの見送り',
-                'description' => '購入を見送った金額が5,000円を超える',
+                'description' => '購入を見送った金額が5,000円に到達する',
                 'condition_type' => $amount,
                 'threshold' => 5000,
                 'icon_key' => 'avoided_amount_5000',
@@ -93,7 +93,7 @@ class MedalSeeder extends Seeder
             [
                 'code' => 'avoided_amount_10000',
                 'name' => 'ついに大台',
-                'description' => '購入を見送った金額が10,000円を超える',
+                'description' => '購入を見送った金額が10,000円に到達する',
                 'condition_type' => $amount,
                 'threshold' => 10000,
                 'icon_key' => 'avoided_amount_10000',

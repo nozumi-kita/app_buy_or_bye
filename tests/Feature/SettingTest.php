@@ -3,6 +3,7 @@
 use App\Models\Item;
 use App\Models\Medal;
 use App\Models\User;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Tests\TestCase;
 
 beforeEach(function () {
@@ -314,7 +315,12 @@ describe('設定編集画面', function () {
         'nameが空' => [['name' => ''], ['name']],
         'nameが50文字を超える' => [['name' => str_repeat('a', 51)], ['name']],
         'emailが空' => [['email' => ''], ['email']],
-        'emailの形式が不正' => [['email' => 'email'], ['email']],
+        'emailにドメインがない' => [['email' => 'email'], ['email']],
+        'emailがドットレスドメインである' => [['email' => 'test@test'], ['email']],
+        'emailに引用符が入っている' => [['email' => '"test"@example.com'], ['email']],
+        'emailにカッコが入っている' => [['email' => '(test)@example.com'], ['email']],
+        'emailにIPアドレス(IPV4)が直書きされている' => [['email' => 'test@[192.0.2.1]'], ['email']],
+        'emailにIPアドレス(IPV6)が直書きされている' => [['email' => 'test@[IPv6:2001:db8::1]'], ['email']],
         'passwordが空' => [['password' => ''], ['password']],
         'passwordが違う' => [['password' => 'wrongpassword'], ['password']],
     ]);
@@ -448,5 +454,40 @@ describe('設定編集画面', function () {
             'name' => '私の名前',
             'email' => 'my_email@example.com',
         ]);
+    });
+
+    describe('DNSチェック', function () {
+        test('本番環境では、メールを受け取れないドメインでは更新できないこと', function () {
+            /** @var TestCase $this */
+            $this->app->detectEnvironment(fn () => 'production');
+
+            // 環境を production にすると、テスト中は無効なCSRFチェックが有効になるため外す
+            $this->withoutMiddleware(ValidateCsrfToken::class);
+
+            $this->actingAs($this->user)
+                ->from(route('account.edit'))
+                ->put(route('account.update'), validAccountUpdateData([
+                    'email' => 'test@example.test',
+                ]))->assertRedirect(route('account.edit'))
+                ->assertInvalid('email');
+
+            $this->assertDatabaseCount(User::class, 1);
+            $this->assertDatabaseHas(User::class, [
+                'email' => 'test@example.com',
+            ]);
+        });
+
+        test('本番環境以外では、メールを受け取れないドメインでも更新できること', function () {
+            /** @var TestCase $this */
+            $this->actingAs($this->user)
+                ->from(route('account.edit'))
+                ->put(route('account.update'), validAccountUpdateData([
+                    'email' => 'test@example.test',
+                ]))->assertRedirect(route('settings.index'));
+
+            $this->assertDatabaseHas(User::class, [
+                'email' => 'test@example.test',
+            ]);
+        });
     });
 });

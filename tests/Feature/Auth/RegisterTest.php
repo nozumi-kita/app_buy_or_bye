@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
@@ -81,7 +82,12 @@ describe('未認証(ログインユーザーでもゲストユーザーでもな
         'nameが空' => [['name' => ''], ['name']],
         'nameが50文字を超える' => [['name' => str_repeat('a', 51)], ['name']],
         'emailが空' => [['email' => ''], ['email']],
-        'emailの形式が不正' => [['email' => 'email'], ['email']],
+        'emailにドメインがない' => [['email' => 'email'], ['email']],
+        'emailがドットレスドメインである' => [['email' => 'test@test'], ['email']],
+        'emailに引用符が入っている' => [['email' => '"test"@example.com'], ['email']],
+        'emailにカッコが入っている' => [['email' => '(test)@example.com'], ['email']],
+        'emailにIPアドレス(IPV4)が直書きされている' => [['email' => 'test@[192.0.2.1]'], ['email']],
+        'emailにIPアドレス(IPV6)が直書きされている' => [['email' => 'test@[IPv6:2001:db8::1]'], ['email']],
         'passwordが空' => [['password' => '', 'password_confirmation' => ''], ['password']],
         'passwordが8文字未満' => [['password' => 'pass', 'password_confirmation' => 'pass'], ['password']],
         'password確認が不一致' => [['password_confirmation' => 'different'], ['password']],
@@ -119,5 +125,35 @@ describe('認証済みユーザー', function () {
     test('登録画面に入れないこと', function () {
         /** @var TestCase $this */
         $this->actingAs(User::factory()->create())->get(route('register'))->assertRedirect(route('items.index'));
+    });
+});
+
+describe('DNSチェック', function () {
+    test('本番環境では、メールを受け取れないドメインでは登録できないこと', function () {
+        /** @var TestCase $this */
+        $this->app->detectEnvironment(fn () => 'production');
+
+        // 環境を production にすると、テスト中は無効なCSRFチェックが有効になるため外す
+        $this->withoutMiddleware(ValidateCsrfToken::class);
+
+        $this->from(route('register'))
+            ->post(route('register'), validRegistrationData([
+                'email' => 'test@example.test',
+            ]))->assertRedirect(route('register'))
+            ->assertInvalid('email');
+
+        $this->assertDatabaseCount(User::class, 0);
+    });
+
+    test('本番環境以外では、メールを受け取れないドメインでも登録できること', function () {
+        /** @var TestCase $this */
+        $this->from(route('register'))
+            ->post(route('register'), validRegistrationData([
+                'email' => 'test@example.test',
+            ]))->assertRedirect(route('items.index'));
+
+        $this->assertDatabaseHas(User::class, [
+            'email' => 'test@example.test',
+        ]);
     });
 });

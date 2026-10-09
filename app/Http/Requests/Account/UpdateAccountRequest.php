@@ -6,6 +6,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Email;
 use Override;
 
 class UpdateAccountRequest extends FormRequest
@@ -30,9 +31,9 @@ class UpdateAccountRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
-                'email',
                 'max:255',
                 Rule::unique('users')->ignore($this->user()->id),
+                Email::defaults(),
             ],
             'password' => ['required', 'current_password'],
         ];

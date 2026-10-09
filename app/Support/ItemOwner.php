@@ -51,12 +51,11 @@ final class ItemOwner
     public function transferItemsTo(User $user): void
     {
         if ($this->hashedSessionId !== null) {
-            $this->items()
-                ->toBase()
+            Item::withoutTimestamps(fn () => $this->items()
                 ->update([
                     'user_id' => $user->id,
                     'hashed_session_id' => null,
-                ]);
+                ]));
         }
     }
 }

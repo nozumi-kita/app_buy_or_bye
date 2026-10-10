@@ -157,3 +157,52 @@ describe('DNSチェック', function () {
         ]);
     });
 });
+
+describe('パスワードのバリデーションの強化', function () {
+    beforeEach(function () {
+        /** @var TestCase $this */
+        $this->app->detectEnvironment(fn () => 'production');
+
+        // 環境をproductionにすると、テスト中は無効なCSRFチェックが有効になるため外す
+        $this->withoutMiddleware(ValidateCsrfToken::class);
+    });
+
+    test('本番環境では、大文字・小文字・記号・数字いずれかが足りない場合バリデーションで弾かれること', function (string $password) {
+        /** @var TestCase $this */
+        $this->from(route('register'))
+            ->post(route('register'), validRegistrationData([
+                'email' => 'test@example.test',
+                'password' => $password,
+                'password_confirmation' => $password,
+            ]))->assertRedirect(route('register'))
+            ->assertInvalid('password');
+    })->with([
+        '小文字なし' => ['PASSWORD1@'],
+        '大文字なし' => ['password1@'],
+        '記号なし' => ['PASSword1'],
+        '数字なし' => ['PASSword@'],
+    ]);
+
+    test('本番環境では、条件を満たす場合パスワードは通ること', function () {
+        /** @var TestCase $this */
+        $this->from(route('register'))
+            ->post(route('register'), validRegistrationData([
+                'email' => 'test@example.test',
+                'password' => 'Tdsfdd@1',
+                'password_confirmation' => 'Tdsfdd@1',
+            ]))->assertRedirect(route('register'))
+            ->assertValid('password');
+    });
+
+    // ネット環境のない場所では、漏洩の確認がされずバリデーションで弾かれないのでテストが失敗します。
+    test('本番環境では、情報漏洩した可能性のあるパスワードではバリデーションで弾かれること', function () {
+        /** @var TestCase $this */
+        $this->from(route('register'))
+            ->post(route('register'), validRegistrationData([
+                'email' => 'test@example.test',
+                'password' => 'PASSword@1',
+                'password_confirmation' => 'PASSword@1',
+            ]))->assertRedirect(route('register'))
+            ->assertInvalid('password');
+    });
+});

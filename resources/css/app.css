@@ -188,6 +188,15 @@ li {
     align-items: center;
 }
 
+.item-list-title-group {
+    display: flex;
+    align-items: center;
+}
+
+.item-list-title-group .form-select {
+    margin-left: 10px;
+}
+
 .link-register-sp {
     display: none;
 }

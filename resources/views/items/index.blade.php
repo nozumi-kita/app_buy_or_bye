@@ -1,8 +1,21 @@
+@use('\App\Enums\ItemStatus')
+
 <x-layouts.app>
     <section>
         <x-items.item-totals :$totals />
         <div class="item-list-header">
-            <h2 class="items-title">気になるもの一覧</h2>
+            <div class="item-list-title-group">
+                <h2 class="items-title">気になるもの一覧</h2>
+                <form method="GET" action="{{ route('items.index') }}">
+                    <select class="form-select" name="status" id="status-filter">
+                        @foreach (ItemStatus::cases() as $status)
+                            <option value="{{ $status->value }}" @selected($selectedStatus === $status)>
+                                {{ $status->label() }}
+                            </option>
+                        @endforeach
+                    </select>
+                </form>
+            </div>
             <div>
                 <a class="link-register" href="{{ route('items.create') }}">気になるものを登録</a>
                 <a class="link-register-sp" href="{{ route('items.create') }}" aria-label="気になるものを登録">+</a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ItemStatus;
+use App\Http\Requests\Item\IndexItemRequest;
 use App\Http\Requests\Item\StoreItemRequest;
 use App\Http\Requests\Item\UpdateItemRequest;
 use App\Models\Item;
@@ -27,15 +28,19 @@ class ItemController extends Controller implements HasMiddleware
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexItemRequest $request)
     {
         $itemOwner = ItemOwner::current();
-
         $items = $itemOwner->items();
+        $selectedStatus = $request->status();
 
         return view('items.index', [
-            'items' => $items->orderBy('updated_at', 'DESC')->get(),
+            'items' => $items
+                ->where('status', $selectedStatus)
+                ->orderBy('updated_at', 'DESC')
+                ->get(),
             'totals' => ItemTotals::for($itemOwner),
+            'selectedStatus' => $selectedStatus,
         ]);
     }
 

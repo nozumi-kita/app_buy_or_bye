@@ -93,6 +93,83 @@ describe('ログインユーザー', function () {
                 ->assertOk()
                 ->assertSeeInOrder(['あとから更新', '先に更新']);
         });
+
+        test('ステータス別に表示されること', function () {
+            /** @var TestCase $this */
+            Item::factory()->for($this->user)->create(validItemData([
+                'name' => '先に登録保留中1',
+                'status' => ItemStatus::Pending,
+                'updated_at' => now()->subSeconds(10),
+            ]));
+
+            Item::factory()->for($this->user)->create(validItemData([
+                'name' => '後に登録保留中2',
+                'status' => ItemStatus::Pending,
+                'updated_at' => now(),
+            ]));
+
+            Item::factory()->for($this->user)->create(validItemData([
+                'name' => 'Test購入済',
+                'status' => ItemStatus::Purchased,
+            ]));
+
+            Item::factory()->for($this->user)->create(validItemData([
+                'name' => 'Test見送り',
+                'status' => ItemStatus::PurchaseAvoided,
+            ]));
+
+            $this->actingAs($this->user)
+                ->get(route('items.index'))
+                ->assertViewHas('selectedStatus', ItemStatus::Pending)
+                ->assertSeeInOrder([
+                    '後に登録保留中2',
+                    '先に登録保留中1',
+                ])->assertDontSee([
+                    'Test購入済',
+                    'Test見送り',
+                ]);
+
+            $this->get('/items?status=purchased')
+                ->assertViewHas('selectedStatus', ItemStatus::Purchased)
+                ->assertOk()
+                ->assertSee('Test購入済')
+                ->assertDontSee([
+                    '後に登録保留中2',
+                    'Test見送り',
+                ]);
+
+            $this->get('/items?status=purchase_avoided')
+                ->assertViewHas('selectedStatus', ItemStatus::PurchaseAvoided)
+                ->assertOk()
+                ->assertSee('Test見送り')
+                ->assertDontSee([
+                    '後に登録保留中2',
+                    'Test購入済',
+                ]);
+        });
+
+        test('ステータス別表示で、ItemStatusにない文字列を入れた場合バリデーションが働きリダイレクトされること', function () {
+            /** @var TestCase $this */
+            Item::factory()->for($this->user)->create([
+                'name' => 'Test保留中',
+                'status' => ItemStatus::Pending,
+            ]);
+
+            Item::factory()->for($this->user)->create([
+                'name' => 'Test見送り',
+                'status' => ItemStatus::PurchaseAvoided,
+            ]);
+
+            $this->actingAs($this->user)
+                ->get('/items?status=purchase_avoided')
+                ->assertOk()
+                ->assertSee('Test見送り');
+
+            $this->from('/items?status=purchase_avoided')
+                ->get('/items?status=testtest')
+                ->assertInvalid('status')
+                ->assertRedirect('/items?status=purchase_avoided');
+        });
     });
 
     describe('新規登録画面', function () {

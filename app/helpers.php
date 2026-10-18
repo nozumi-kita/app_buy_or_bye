@@ -11,7 +11,7 @@ if (! function_exists('format_jst')) {
 }
 
 if (! function_exists('format_jpy')) {
-    function format_jpy(int $price)
+    function format_jpy(int $price): string
     {
         return Number::currency($price, in: 'JPY');
     }

@@ -1,4 +1,6 @@
 /* 基本設定 */
+@import 'sanitize.css';
+
 body {
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 16px;

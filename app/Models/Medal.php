@@ -29,7 +29,7 @@ class Medal extends Model
             ->withTimestamps();
     }
 
-    public function iconUrl()
+    public function iconUrl(): string
     {
         return asset("images/medals/{$this->icon_key}.svg");
     }

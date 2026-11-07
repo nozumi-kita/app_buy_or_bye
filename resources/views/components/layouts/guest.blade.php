@@ -1,5 +1,5 @@
 <x-layouts.base>
-    <main class="auth">
+    <main>
         {{ $slot }}
     </main>
 </x-layouts.base>

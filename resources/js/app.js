@@ -1,6 +1,9 @@
 import './bootstrap';
-import { initHamburgerMenu } from './hamburger_menu.js';
+import Alpine from 'alpinejs';
 import { initSelectedStatus } from './selected_status.js';
 
-initHamburgerMenu();
+window.Alpine = Alpine;
+
+Alpine.start();
+
 initSelectedStatus();

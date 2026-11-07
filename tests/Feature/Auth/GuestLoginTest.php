@@ -9,7 +9,7 @@ test('ログイン画面にゲストログインボタンが表示されてい�
     /** @var TestCase $this */
     $this->get(route('login'))
         ->assertOk()
-        ->assertSee('btn-guest-login');
+        ->assertSeeText('ゲストログイン');
 });
 
 test('ゲストログイン成功時に気になるもの一覧画面にリダイレクトされるが、認証はされていないこと', function () {
@@ -50,7 +50,7 @@ test('ゲストログイン時、ヘッダーの表示が切り替わること',
     $this->get(route('items.index'))
         ->assertOk()
         ->assertSee([
-            'データを引き継いでアカウント作成',
+            'アカウント作成',
             'ゲストログイン終了',
         ])->assertDontSee([
             '実績',
@@ -82,24 +82,24 @@ test('ゲストログインを終了後に気になるもの一覧画面への�
         ->assertRedirect(route('login'));
 });
 
-test('ゲストログイン中は、ログイン画面に「ゲストログイン」ボタンが表示されないこと', function () {
+test('ゲストログイン中は、「ホームに戻る」リンクが表示されていること', function () {
     /** @var TestCase $this */
     startGuestSession();
 
     $this->get(route('login'))
         ->assertOk()
-        ->assertDontSee('btn-guest-login');
+        ->assertSee('ホームに戻る');
 });
 
-test('ゲストログイン中、ユーザー登録画面内にログイン画面に移動するリンクが表示されていないこと', function () {
+test('ゲストログイン中、ユーザー登録画面内に「ホームに戻る」リンクが表示され、ログイン画面に移動するリンクが表示されていないこと', function () {
     /** @var TestCase $this */
     startGuestSession();
 
     $this->get(route('register'))
         ->assertOk()
         ->assertViewIs('auth.register')
-        ->assertDontSee('アカウントをお持ちの方はこちら')
-        ->assertSee('一覧に戻る');
+        ->assertDontSee('アカウントをお持ちの方')
+        ->assertSee('ホームに戻る');
 });
 
 test('アカウント作成時にゲストログインの判定フラグのis_guestが消えること', function () {

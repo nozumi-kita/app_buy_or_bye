@@ -134,7 +134,7 @@ describe('実績達成', function () {
         $this->actingAs($this->user)
             ->get(route('medals'))
             ->assertOk()
-            ->assertSee('達成日:')
+            ->assertSee('達成済')
             ->assertDontSee('0件/1件');
     });
 
@@ -277,7 +277,7 @@ describe('実績達成', function () {
             ->followingRedirects()
             ->post(route('items.store'), validItemData())
             ->assertOk()
-            ->assertDontSee('class="flash flash-award"', escape: false);
+            ->assertDontSee('実績:「テストメダル」を達成しました！');
     });
 
     test('ゲストが登録・更新してもメダルの付与はさせないこと', function () {
@@ -368,7 +368,7 @@ describe('実績達成', function () {
             ->get(route('medals'))
             ->assertOk()
             ->assertSee([
-                '達成済メダル', '達成日: 2026/09/20',
+                '達成済メダル', '2026/09/20達成済',
                 '未達成メダル', '3件/5件', 'avoided_count_1.svg',
             ]);
     });
@@ -421,7 +421,7 @@ describe('実績達成', function () {
             ->get(route('medals'))
             ->assertOk()
             ->assertSee(['他ユーザーのメダル', '0件/1件'])
-            ->assertDontSee(['達成日: 2026/09/20']);
+            ->assertDontSee(['2026/09/20達成済']);
     });
 
     test('未認証・ゲストユーザーはログイン画面にリダイレクトされること', function () {

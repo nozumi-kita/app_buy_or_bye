@@ -12,12 +12,12 @@ describe('未認証(ログインユーザーでもゲストユーザーでもな
         $this->get(route('register'))->assertOk()->assertViewIs('auth.register');
     });
 
-    test('登録画面にログイン画面へのリンクが表示され、「一覧に戻る」は表示されないこと', function () {
+    test('登録画面にログイン画面へのリンクが表示され、「ホームに戻る」は表示されないこと', function () {
         /** @var TestCase $this */
         $this->get(route('register'))
             ->assertOk()
-            ->assertSee('アカウントをお持ちの方はこちら')
-            ->assertDontSee('一覧に戻る');
+            ->assertSee('アカウントをお持ちの方')
+            ->assertDontSee('ホームに戻る');
     });
 
     test('ユーザー登録が成功し、DBに保存され、認証状態になること', function () {

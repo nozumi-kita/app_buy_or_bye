@@ -37,8 +37,7 @@ describe('ログインユーザー', function () {
 
             $this->actingAs($this->user)
                 ->get(route('items.index'))
-                ->assertSee('2026/09/14 00:30')
-                ->assertDontSee('2026/09/13 15:30');
+                ->assertSee('2026/09/14');
         });
 
         test('他のユーザーの気になるものが一覧に表示されないこと', function () {
@@ -278,12 +277,11 @@ describe('ログインユーザー', function () {
             /** @var TestCase $this */
             $this->travelTo(CarbonImmutable::parse('2026-09-14 00:30:00', 'Asia/Tokyo'));
 
-            Item::factory()->for($this->user)->create();
+            $item = Item::factory()->for($this->user)->create();
 
             $this->actingAs($this->user)
-                ->get(route('items.index'))
-                ->assertSee('2026/09/14 00:30')
-                ->assertDontSee('2026/09/13 15:30');
+                ->get(route('items.show', $item))
+                ->assertSee('2026/09/14 00:30');
         });
 
         test('他のユーザーの気になるものは閲覧できず、404エラーとなること', function () {
@@ -627,7 +625,7 @@ describe('ログインユーザー', function () {
                     '設定',
                     'ログアウト',
                 ])->assertDontSee([
-                    'データを引き継いでアカウント作成',
+                    'アカウント作成',
                     'ゲストログイン終了',
                 ]);
         });

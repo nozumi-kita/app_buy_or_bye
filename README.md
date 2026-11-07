@@ -7,17 +7,20 @@
 ---
 
 ## スクリーンショット
-<img width="2932" height="1596" alt="CleanShot 2026-10-06 at 19 40 19@2x" src="https://github.com/user-attachments/assets/3200eb7b-ed26-40b0-9345-fb40e0995e76" />
-<img width="2940" height="1460" alt="CleanShot 2026-10-06 at 21 27 27@2x" src="https://github.com/user-attachments/assets/33324c13-682c-4083-bcc1-a4919b0758f0" />
-<img width="1471" height="801" alt="CleanShot 2026-10-06 at 19 35 19@2x" src="https://github.com/user-attachments/assets/8f6a7b2a-4f8e-46bc-8ce5-0ccb938543fd" />
+
+<img width="2936" height="1662" alt="login" src="https://github.com/user-attachments/assets/bd309c55-8fcf-42c3-82f1-1a4ca96a88b3" />
+<img width="2942" height="1670" alt="top" src="https://github.com/user-attachments/assets/e788e947-8da6-4dc8-9ca2-b48b2d6e538c" />
+<img width="2938" height="1670" alt="account-delete" src="https://github.com/user-attachments/assets/0f2b29b4-8c44-48b8-8247-0310bf131442" />
+<img width="300" alt="sp-login" src="https://github.com/user-attachments/assets/94f976d7-0445-439a-b8d3-24aa47d6704f" />
+<img width="300" alt="sp-top" src="https://github.com/user-attachments/assets/3e5ce65b-3167-4094-a231-8d5c4dce4aff" />
 
 ---
 
-## 使用技術
+## 使用技術(2026年11月7日時点)
 
-- バックエンド: PHP 8.5 / Laravel 12
+- バックエンド: PHP 8.5.12 / Laravel 12.69.2
 - データベース: PostgreSQL 18
-- フロントエンド: Blade / JavaScript / CSS
+- フロントエンド: Blade / Tailwind CSS 4.3.3 / Alpine.js 3.17.5 / JavaScript
 - テスト: Pest 4
 - 開発環境: Docker (Laravel Sail)
 

@@ -17,47 +17,36 @@
             @method('PUT')
             <div class="flex flex-col mb-4">
                 <label class="mb-4" for="name">品名</label>
-                <input
-                    id="name"
-                    class="border border-line rounded-lg p-3 focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
+                <x-element.input
                     name="name"
-                    type="text"
-                    value="{{ old('name', $item->name) }}"
+                    :value="$item->name"
                     autofocus
                     maxlength="255"
-                    placeholder="キーボード"
+                    placeholder="例) キーボード"
                     required
-                >
+                />
                 @error('name')
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror
             </div>
             <div class="flex flex-col mb-4">
                 <label class="mb-4" for="price">価格(¥)</label>
-                <input
-                    id="price"
-                    class="border border-line rounded-lg p-3 focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
+                <x-element.input
                     name="price"
                     type="number"
                     min="1"
                     max="10000000"
-                    value="{{ old('price', $item->price) }}"
-                    placeholder="20000"
+                    :value="$item->price"
+                    placeholder="例) 20000"
                     required
-                >
+                />
                 @error('price')
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror
             </div>
             <div class="flex flex-col mb-4">
                 <label class="mb-4" for="memo">メモ</label>
-                <textarea
-                    id="memo"
-                    class="border border-line rounded-lg p-3 focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
-                    name="memo"
-                    maxlength="500"
-                    rows="3"
-                >{{ old('memo', $item->memo) }}</textarea>
+                <x-element.textarea name="memo" :value="$item->memo" />
                 @error('memo')
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror

@@ -22,32 +22,27 @@
                         @csrf
                         <div>
                             <label class="block mb-2" for="email">メールアドレス</label>
-                            <input
-                                id="email"
-                                class="w-full border border-line rounded-lg p-3 placeholder:text-muted focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
+                            <x-element.input
                                 name="email"
                                 type="email"
-                                value="{{ old('email') }}"
                                 autocomplete="username"
                                 placeholder="user@example.com"
                                 autofocus
                                 required
-                            >
+                            />
                             @error('email')
                                 <p class="text-error mt-2">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
                             <label class="block mb-2" for="password">パスワード</label>
-                            <input
-                                id="password"
-                                class="w-full border border-line rounded-lg p-3 placeholder:text-muted focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
+                            <x-element.input
                                 name="password"
                                 type="password"
                                 autocomplete="current-password"
                                 placeholder="パスワードを入力"
                                 required
-                            >
+                            />
                             @error('password')
                                 <p class="text-error mt-2">{{ $message }}</p>
                             @enderror

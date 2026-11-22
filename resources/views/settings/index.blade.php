@@ -53,7 +53,7 @@
                 <h3 class="text-xl px-4 pt-2 pb-4">アカウント削除</h3>
                 <div class="flex flex-col" x-data="{ open: false }" @keydown.escape.window="open = false">
                     @error('password')
-                        <p class="text-error mb-2 px-4 flex">
+                        <p class="text-error mb-2 px-4 flex gap-1">
                             <x-icon.exclamation-circle />
                             {{ $message }}
                         </p>
@@ -76,14 +76,13 @@
                                     @method('DELETE')
                                     <div class="flex flex-col">
                                         <label class="mb-4" for="password">パスワード</label>
-                                        <input
-                                            id="password"
-                                            class="p-3 rounded-lg border border-line mb-4 placeholder:text-muted focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
+                                        <x-element.input
                                             name="password"
                                             type="password"
                                             placeholder="パスワードを入力"
                                             required
                                             x-model="password"
+                                            class="mb-4"
                                         />
                                     </div>
                                     <div class="grid grid-cols-2 gap-3">

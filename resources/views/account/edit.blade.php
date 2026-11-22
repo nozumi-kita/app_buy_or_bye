@@ -15,44 +15,37 @@
             @method('PUT')
             <div class="flex flex-col gap-2">
                 <label for="name">ユーザー名</label>
-                <input
-                    class="border border-line rounded-lg p-3 placeholder:text-muted focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
-                    id="name"
+                <x-element.input
                     name="name"
-                    type="text"
-                    value="{{ old('name', $user->name) }}"
+                    :value="$user->name"
                     placeholder="例) 山田太郎"
                     required
-                >
+                />
                 @error('name')
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror
             </div>
             <div class="flex flex-col gap-2">
                 <label for="email">メールアドレス</label>
-                <input
-                    class="border border-line rounded-lg p-3 placeholder:text-muted focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
-                    id="email"
+                <x-element.input
                     name="email"
                     type="email"
-                    value="{{ old('email', $user->email) }}"
+                    :value="$user->email"
                     placeholder="例) user@example.com"
                     required
-                >
+                />
                 @error('email')
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror
             </div>
             <div class="flex flex-col gap-2 mb-2">
                 <label for="password">パスワード</label>
-                <input
-                    class="border border-line rounded-lg placeholder:text-muted p-3 focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
+                <x-element.input
                     name="password"
-                    id="password"
                     type="password"
                     placeholder="パスワードを入力してください"
                     required
-                >
+                />
                 @error('password')
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror

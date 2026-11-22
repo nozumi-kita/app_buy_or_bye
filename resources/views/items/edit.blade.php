@@ -20,7 +20,6 @@
                 <x-element.input
                     name="name"
                     :value="$item->name"
-                    autofocus
                     maxlength="255"
                     placeholder="例) キーボード"
                     required

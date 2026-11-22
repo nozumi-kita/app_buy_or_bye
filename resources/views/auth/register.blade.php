@@ -27,48 +27,39 @@
                     @csrf
                     <div>
                         <label class="block mb-2" for="name">ユーザー名</label>
-                        <input
-                            id="name"
-                            class="w-full border border-line rounded-lg p-3 placeholder:text-muted focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
+                        <x-element.input
                             name="name"
-                            type="text"
-                            value="{{ old('name') }}"
                             autocomplete="name"
                             placeholder="例) 山田太郎"
                             autofocus
                             required
-                        >
+                        />
                         @error('name')
                             <p class="text-error">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
                         <label class="block mb-2" for="email">メールアドレス</label>
-                        <input
-                            id="email"
-                            class="w-full border border-line rounded-lg p-3 placeholder:text-muted focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
+                        <x-element.input
                             name="email"
                             type="email"
-                            value="{{ old('email') }}"
                             autocomplete="username"
                             placeholder="例) user@example.com"
                             required
-                        >
+                        />
                         @error('email')
                             <p class="text-error">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-1">
                         <label class="block mb-2" for="password">パスワード</label>
-                        <input
-                            id="password"
-                            class="w-full border border-line rounded-lg p-3 placeholder:text-muted focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
+                        <x-element.input
                             name="password"
                             type="password"
                             autocomplete="new-password"
-                            placeholder="例) TafG9@3b"
+                            placeholder="パスワードを入力"
                             required
-                        >
+                        />
                         <p class="text-sm mt-2">8文字以上で、大文字・小文字・数字・記号を全て含むこと</p>
                         @error('password')
                             <p class="text-error">{{ $message }}</p>
@@ -76,15 +67,13 @@
                     </div>
                     <div class="mb-2">
                         <label class="block mb-2" for="password_confirmation">パスワード確認</label>
-                        <input
-                            id="password_confirmation"
-                            class="w-full border border-line rounded-lg p-3 placeholder:text-muted focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
+                        <x-element.input
                             name="password_confirmation"
                             type="password"
                             autocomplete="new-password"
                             placeholder="もう一度同じパスワードを入力"
                             required
-                        >
+                        />
                     </div>
                     <button
                         class="w-full cursor-pointer rounded-3xl bg-primary text-fg-on-emphasis px-8 py-3 transition duration-300 hover:bg-primary-hover"

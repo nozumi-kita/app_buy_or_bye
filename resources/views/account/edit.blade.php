@@ -5,16 +5,7 @@
                 <a class="size-9 flex justify-center items-center rounded-full hover:bg-highlight transition duration-300 ease-in-out justify-self-start"
                     href="{{ route('settings.index') }}" aria-label="戻る"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="size-7"
-                    >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                    </svg>
+                    <x-icon.chevron-left />
                 </a>
                 <h2 class="text-center">ユーザー情報編集</h2>
             </div>

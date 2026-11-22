@@ -4,16 +4,7 @@
             <a class="flex justify-center items-center size-9 hover:bg-highlight transition duration-300 ease-in-out rounded-full justify-self-start"
                 href="{{ route('items.index') }}" aria-label="戻る"
             >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-7"
-                >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                </svg>
+                <x-icon.chevron-left />
             </a>
             <h2 class="text-center">実績</h2>
         </div>
@@ -32,18 +23,7 @@
                         @if ($medal->isAcquired())
                             <div class="text-center mt-auto">
                                 <p class="flex items-center justify-center text-success-message">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="size-6"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                                        />
-                                    </svg>
+                                    <x-icon.check-circle />
                                     <span class="text-lg">
                                         {{ format_jst($medal->acquired_at, 'Y/m/d') }}達成済
                                     </span>

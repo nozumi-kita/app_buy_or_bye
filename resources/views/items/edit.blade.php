@@ -4,19 +4,10 @@
     <section>
         <div class="text-2xl pb-4 mb-2 border-b border-line">
             <div class="grid grid-cols-[1fr_auto_1fr] mx-auto max-w-md px-4">
-                <a class="rounded-full hover:bg-highlight transition duration-300 ease-in-out justify-self-start"
+                <a class="flex size-9 justify-center items-center rounded-full hover:bg-highlight transition duration-300 ease-in-out justify-self-start"
                     href="{{ route('items.index') }}" aria-label="戻る"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="size-9 p-1"
-                    >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                    </svg>
+                    <x-icon.chevron-left />
                 </a>
                 <h2>編集</h2>
             </div>

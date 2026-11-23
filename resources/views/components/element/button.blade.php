@@ -1,4 +1,4 @@
-@props(['theme' => 'primary', 'type' => 'button', 'fullWidth' => true])
+@props(['theme' => 'primary', 'type' => 'button', 'fullWidth' => true, 'href' => null])
 
 @php
     $themeClasses = [
@@ -7,8 +7,12 @@
     ];
 
     $baseClasses = 'py-3 cursor-pointer rounded-3xl transition';
+
+    $attributes = $attributes->class([$baseClasses, 'w-full' => $fullWidth, $themeClasses[$theme]]);
 @endphp
 
-<button type="{{ $type }}"
-    {{ $attributes->class([$baseClasses, 'w-full' => $fullWidth, $themeClasses[$theme]]) }}
->{{ $slot }}</button>
+@if ($href)
+    <a href="{{ $href }}" {{ $attributes }}>{{ $slot }}</a>
+@else
+    <button type="{{ $type }}" {{ $attributes }}>{{ $slot }}</button>
+@endif

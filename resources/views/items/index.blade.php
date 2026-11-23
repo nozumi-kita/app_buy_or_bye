@@ -20,9 +20,9 @@
                 </form>
             </div>
             <div>
-                <a class="hidden w-full rounded-3xl bg-primary px-3 py-3 text-fg-on-emphasis transition duration-300 hover:bg-primary-hover md:block"
-                    href="{{ route('items.create') }}"
-                >気になるものを登録</a>
+                <x-element.button href="{{ route('items.create') }}" class="hidden md:block px-3">
+                    気になるものを登録
+                </x-element.button>
                 <a class="fixed bottom-18 right-6 flex justify-center items-center text-fg-on-emphasis size-12 md:hidden rounded-full bg-primary hover:bg-primary-hover z-1 transition duration-300"
                     href="{{ route('items.create') }}" aria-label="気になるものを登録"
                 >

@@ -51,10 +51,9 @@
                 @enderror
             </div>
             <div class="flex">
-                <button
-                    class="w-full cursor-pointer px-10 py-3 text-fg-on-emphasis rounded-3xl bg-primary hover:bg-primary-hover transition duration-300"
-                    type="submit"
-                >更新</button>
+                <x-element.button type="submit">
+                    更新
+                </x-element.button>
             </div>
         </form>
     </section>

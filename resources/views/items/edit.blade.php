@@ -12,11 +12,11 @@
                 <h2>編集</h2>
             </div>
         </div>
-        <form class="mx-auto max-w-md p-4" method="POST" action="{{ route('items.update', $item) }}">
+        <form class="flex flex-col gap-4 mx-auto max-w-md p-4" method="POST" action="{{ route('items.update', $item) }}">
             @csrf
             @method('PUT')
-            <div class="flex flex-col mb-4">
-                <label class="mb-4" for="name">品名</label>
+            <div class="flex flex-col gap-2">
+                <label for="name">品名</label>
                 <x-element.input
                     name="name"
                     :value="$item->name"
@@ -28,8 +28,8 @@
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="flex flex-col mb-4">
-                <label class="mb-4" for="price">価格(¥)</label>
+            <div class="flex flex-col gap-2">
+                <label for="price">価格(¥)</label>
                 <x-element.input
                     name="price"
                     type="number"
@@ -43,15 +43,15 @@
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="flex flex-col mb-4">
-                <label class="mb-4" for="memo">メモ</label>
+            <div class="flex flex-col gap-2">
+                <label for="memo">メモ</label>
                 <x-element.textarea name="memo" :value="$item->memo" />
                 @error('memo')
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="flex flex-col mb-4">
-                <label class="mb-4" for="status">ステータス</label>
+            <div class="flex flex-col gap-2 mb-2">
+                <label for="status">ステータス</label>
                 <select
                     class="w-30 border border-line rounded-lg p-3 focus-visible:ring-1 focus-visible:outline-none focus-visible:ring-focus-line"
                     name="status" id="status"

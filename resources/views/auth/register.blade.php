@@ -75,10 +75,9 @@
                             required
                         />
                     </div>
-                    <button
-                        class="w-full cursor-pointer rounded-3xl bg-primary text-fg-on-emphasis px-8 py-3 transition duration-300 hover:bg-primary-hover"
-                        type="submit"
-                    >ユーザー登録</button>
+                    <x-element.button type="submit">
+                        ユーザー登録
+                    </x-element.button>
                 </form>
             </div>
             @if (!$guestLoggedIn)

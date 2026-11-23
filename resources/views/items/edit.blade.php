@@ -64,10 +64,9 @@
                 </select>
             </div>
             <div>
-                <button
-                    class="w-full cursor-pointer rounded-3xl px-12 py-3 text-fg-on-emphasis bg-primary hover:bg-primary-hover transition duration-300"
-                    type="submit"
-                >更新</button>
+                <x-element.button type="submit">
+                    更新
+                </x-element.button>
             </div>
         </form>
     </section>

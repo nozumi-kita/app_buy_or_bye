@@ -47,10 +47,9 @@
                 @enderror
             </div>
             <div class="flex justify-center">
-                <button
-                    class="w-full cursor-pointer rounded-3xl px-12 py-3 text-fg-on-emphasis bg-primary hover:bg-primary-hover transition duration-300"
-                    type="submit"
-                >登録</button>
+                <x-element.button type="submit">
+                    登録
+                </x-element.button>
             </div>
         </form>
     </section>

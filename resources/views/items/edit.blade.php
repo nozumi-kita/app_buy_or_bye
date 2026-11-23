@@ -24,9 +24,7 @@
                     placeholder="例) キーボード"
                     required
                 />
-                @error('name')
-                    <p class="text-error mt-2">{{ $message }}</p>
-                @enderror
+                <x-element.input-error name="name" />
             </div>
             <div class="flex flex-col gap-2">
                 <label for="price">価格(¥)</label>
@@ -39,16 +37,12 @@
                     placeholder="例) 20000"
                     required
                 />
-                @error('price')
-                    <p class="text-error mt-2">{{ $message }}</p>
-                @enderror
+                <x-element.input-error name="price" />
             </div>
             <div class="flex flex-col gap-2">
                 <label for="memo">メモ</label>
                 <x-element.textarea name="memo" :value="$item->memo" />
-                @error('memo')
-                    <p class="text-error mt-2">{{ $message }}</p>
-                @enderror
+                <x-element.input-error name="memo" />
             </div>
             <div class="flex flex-col gap-2 mb-2">
                 <label for="status">ステータス</label>

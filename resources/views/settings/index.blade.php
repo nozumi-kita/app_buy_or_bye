@@ -59,12 +59,14 @@
                         </p>
                     @enderror
                     <p class="px-4 pb-4">アカウントは一度削除すると戻せません。</p>
-                    <button
-                        class="self-end px-2 py-1 mb-4 mr-4 cursor-pointer text-danger border rounded-3xl hover:text-fg-on-emphasis hover:bg-danger-solid-hover hover:border-danger-solid-hover transition duration-100"
-                        type="button" @click="open = !open"
+                    <x-element.button
+                        theme="danger"
+                        :full-width="false"
+                        class="self-end px-2 mb-4 mr-4"
+                        @click="open = !open"
                     >
                         アカウントを削除する
-                    </button>
+                    </x-element.button>
                     <div x-show="open" x-cloak
                         class="flex flex-col fixed inset-0 items-center justify-center text-fg bg-modal-bg z-10"
                     >
@@ -86,14 +88,12 @@
                                         />
                                     </div>
                                     <div class="grid grid-cols-2 gap-3">
-                                        <button type="button"
-                                            class="cursor-pointer py-3 rounded-3xl text-fg-on-emphasis bg-secondary hover:bg-secondary-hover transition duration-300"
-                                            @click="open = false"
-                                        >キャンセル</button>
-                                        <button
-                                            class="py-3 enabled:cursor-pointer text-danger border rounded-3xl enabled:hover:text-fg-on-emphasis enabled:hover:bg-danger-solid-hover enabled:hover:border-danger-solid-hover disabled:opacity-50 disabled:cursor-not-allowed transition duration-100"
-                                            type="submit" :disabled="password === ''"
-                                        >削除する</button>
+                                        <x-element.button theme="secondary" @click="open = false">
+                                            キャンセル
+                                        </x-element.button>
+                                        <x-element.button theme="danger" type="submit" ::disabled="password === ''">
+                                            削除
+                                        </x-element.button>
                                     </div>
                                 </form>
                             </div>

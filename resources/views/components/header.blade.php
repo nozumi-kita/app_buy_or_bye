@@ -51,18 +51,14 @@
                                 >
                                     <p class="mb-2">ログアウトします。本当によろしいですか？</p>
                                     <div class="grid grid-cols-2 gap-3">
-                                        <button
-                                            class="cursor-pointer bg-secondary hover:bg-secondary-hover py-3 rounded-3xl text-fg-on-emphasis transition duration-300"
-                                            type="button" @click="open = false"
-                                        >キャンセル</button>
+                                        <x-element.button theme="secondary" @click="open = false">
+                                            キャンセル
+                                        </x-element.button>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <button
-                                                class="w-full cursor-pointer py-3 rounded-3xl text-fg-on-emphasis bg-primary hover:bg-primary-hover transition duration-300"
-                                                type="submit"
-                                            >
+                                            <x-element.button type="submit">
                                                 ログアウト
-                                            </button>
+                                            </x-element.button>
                                         </form>
                                     </div>
                                 </div>
@@ -85,7 +81,7 @@
                                 type="button" @click="open = !open"
                             >
                                 <x-icon.arrow-right-start-on-rectangle />
-                                ゲストログイン終了
+                                ゲスト終了
                             </button>
                             <div x-show="open" x-cloak
                                 class="flex flex-col fixed inset-0 items-center justify-center text-fg bg-modal-bg z-100"
@@ -96,18 +92,14 @@
                                     <p class="mb-2">ゲストログインを終了すると、<span
                                             class="text-danger">登録したデータは二度と表示できません。</span>よろしいですか？</p>
                                     <div class="grid grid-cols-2 gap-3">
-                                        <button
-                                            class="cursor-pointer bg-secondary hover:bg-secondary-hover py-3 rounded-3xl text-fg-on-emphasis transition duration-300"
-                                            type="button" @click="open = false"
-                                        >キャンセル</button>
+                                        <x-element.button theme="secondary" @click="open = false">
+                                            キャンセル
+                                        </x-element.button>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <button
-                                                class="cursor-pointer w-full py-3 text-fg-on-emphasis rounded-3xl bg-primary hover:bg-primary-hover transition duration-300"
-                                                type="submit"
-                                            >
-                                                ゲストログイン終了
-                                            </button>
+                                            <x-element.button type="submit">
+                                                ゲスト終了
+                                            </x-element.button>
                                         </form>
                                     </div>
                                 </div>

@@ -47,10 +47,9 @@
                                 <p class="text-error mt-2">{{ $message }}</p>
                             @enderror
                         </div>
-                        <button
-                            class="w-full cursor-pointer rounded-3xl bg-primary px-8 py-3 text-center text-fg-on-emphasis transition duration-300 hover:bg-primary-hover"
-                            type="submit"
-                        >ログイン</button>
+                        <x-element.button type="submit">
+                            ログイン
+                        </x-element.button>
                     </form>
                     <div class="relative flex items-center justify-center my-2 md:my-6">
                         <span class="absolute inset-x-0 h-px bg-line"></span>
@@ -73,10 +72,9 @@
                     @else
                         <div>
                             <div x-data="{ open: false }" @keydown.escape.window="open=false">
-                                <button
-                                    class="w-full cursor-pointer rounded-3xl bg-secondary px-8 py-3 text-fg-on-emphasis transition duration-300 hover:bg-secondary-hover"
-                                    type="button" @click="open = !open"
-                                >ゲストログイン</button>
+                                <x-element.button theme="secondary" @click="open = !open">
+                                    ゲストログイン
+                                </x-element.button>
                                 <div x-show="open" x-cloak
                                     class="flex flex-col fixed inset-0 items-center justify-center bg-modal-bg"
                                 >
@@ -85,18 +83,14 @@
                                     >
                                         <p class="mb-2">ゲストログインを開始します。よろしいですか？</p>
                                         <div class="grid grid-cols-2 gap-3">
-                                            <button
-                                                class="cursor-pointer bg-secondary hover:bg-secondary-hover text-fg-on-emphasis p-2 rounded-3xl transition duration-300"
-                                                type="button" @click="open = false"
-                                            >キャンセル</button>
+                                            <x-element.button theme="secondary" @click="open = false">
+                                                キャンセル
+                                            </x-element.button>
                                             <form method="POST" action="{{ route('guest-login') }}">
                                                 @csrf
-                                                <button
-                                                    class="w-full cursor-pointer text-fg-on-emphasis gap-1 py-3 rounded-3xl bg-primary hover:bg-primary-hover transition duration-300"
-                                                    type="submit"
-                                                >
-                                                    ゲストログイン開始
-                                                </button>
+                                                <x-element.button type="submit">
+                                                    ゲストログイン
+                                                </x-element.button>
                                             </form>
                                         </div>
                                     </div>

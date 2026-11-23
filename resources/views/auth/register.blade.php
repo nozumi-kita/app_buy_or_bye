@@ -22,7 +22,7 @@
             </p>
         @endif
         <div>
-            <div class="mx-4 mb-4 md:mx-6">
+            <div class="mx-4 md:mx-6">
                 <form class="flex flex-col gap-4" method="POST" action="{{ route('register') }}">
                     @csrf
                     <div>
@@ -34,9 +34,7 @@
                             autofocus
                             required
                         />
-                        @error('name')
-                            <p class="text-error">{{ $message }}</p>
-                        @enderror
+                        <x-element.input-error name="name" class="mt-2" />
                     </div>
                     <div>
                         <label class="block mb-2" for="email">メールアドレス</label>
@@ -47,9 +45,7 @@
                             placeholder="例) user@example.com"
                             required
                         />
-                        @error('email')
-                            <p class="text-error">{{ $message }}</p>
-                        @enderror
+                        <x-element.input-error name="email" class="mt-2" />
                     </div>
                     <div class="mb-1">
                         <label class="block mb-2" for="password">パスワード</label>
@@ -61,9 +57,7 @@
                             required
                         />
                         <p class="text-sm mt-2">8文字以上で、大文字・小文字・数字・記号を全て含むこと</p>
-                        @error('password')
-                            <p class="text-error">{{ $message }}</p>
-                        @enderror
+                        <x-element.input-error name="password" class="mt-2" />
                     </div>
                     <div class="mb-2">
                         <label class="block mb-2" for="password_confirmation">パスワード確認</label>

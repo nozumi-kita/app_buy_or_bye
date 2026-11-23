@@ -30,9 +30,7 @@
                                 autofocus
                                 required
                             />
-                            @error('email')
-                                <p class="text-error mt-2">{{ $message }}</p>
-                            @enderror
+                            <x-element.input-error name="email" class="mt-2" />
                         </div>
                         <div>
                             <label class="block mb-2" for="password">パスワード</label>
@@ -43,9 +41,7 @@
                                 placeholder="パスワードを入力"
                                 required
                             />
-                            @error('password')
-                                <p class="text-error mt-2">{{ $message }}</p>
-                            @enderror
+                            <x-element.input-error name="password" class="mt-2" />
                         </div>
                         <x-element.button type="submit">
                             ログイン

@@ -10,10 +10,10 @@
                 <h2 class="text-center">登録</h2>
             </div>
         </div>
-        <form class="mx-auto max-w-md p-4" method="POST" action="{{ route('items.store') }}">
+        <form class="flex flex-col gap-4 mx-auto max-w-md p-4" method="POST" action="{{ route('items.store') }}">
             @csrf
-            <div class="flex flex-col mb-4">
-                <label class="mb-4" for="name">品名</label>
+            <div class="flex flex-col gap-2">
+                <label for="name">品名</label>
                 <x-element.input
                     name="name"
                     autofocus
@@ -25,8 +25,8 @@
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="flex flex-col mb-4">
-                <label class="mb-4" for="price">価格(¥)</label>
+            <div class="flex flex-col gap-2">
+                <label for="price">価格(¥)</label>
                 <x-element.input
                     name="price"
                     type="number"
@@ -39,8 +39,8 @@
                     <p class="text-error mt-2">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="flex flex-col mb-6">
-                <label class="mb-4" for="memo">メモ</label>
+            <div class="flex flex-col gap-2 mb-2">
+                <label for="memo">メモ</label>
                 <x-element.textarea name="memo" />
                 @error('memo')
                     <p class="text-error mt-2">{{ $message }}</p>

@@ -20,8 +20,8 @@
                 <div class="mx-4 md:mx-6 md:mb-2">
                     <form class="gap-6 flex flex-col md:gap-8" method="POST" action="{{ route('login') }}">
                         @csrf
-                        <div>
-                            <label class="block mb-2" for="email">メールアドレス</label>
+                        <div class="flex flex-col gap-2">
+                            <label for="email">メールアドレス</label>
                             <x-element.input
                                 name="email"
                                 type="email"
@@ -32,8 +32,8 @@
                             />
                             <x-element.input-error name="email" class="mt-2" />
                         </div>
-                        <div>
-                            <label class="block mb-2" for="password">パスワード</label>
+                        <div class="flex flex-col gap-2">
+                            <label for="password">パスワード</label>
                             <x-element.input
                                 name="password"
                                 type="password"

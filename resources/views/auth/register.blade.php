@@ -25,8 +25,8 @@
             <div class="mx-4 md:mx-6">
                 <form class="flex flex-col gap-4" method="POST" action="{{ route('register') }}">
                     @csrf
-                    <div>
-                        <label class="block mb-2" for="name">ユーザー名</label>
+                    <div class="flex flex-col gap-2">
+                        <label for="name">ユーザー名</label>
                         <x-element.input
                             name="name"
                             autocomplete="name"
@@ -34,10 +34,10 @@
                             autofocus
                             required
                         />
-                        <x-element.input-error name="name" class="mt-2" />
+                        <x-element.input-error name="name" />
                     </div>
-                    <div>
-                        <label class="block mb-2" for="email">メールアドレス</label>
+                    <div class="flex flex-col gap-2">
+                        <label for="email">メールアドレス</label>
                         <x-element.input
                             name="email"
                             type="email"
@@ -45,10 +45,10 @@
                             placeholder="例) user@example.com"
                             required
                         />
-                        <x-element.input-error name="email" class="mt-2" />
+                        <x-element.input-error name="email" />
                     </div>
-                    <div class="mb-1">
-                        <label class="block mb-2" for="password">パスワード</label>
+                    <div class="flex flex-col gap-2">
+                        <label for="password">パスワード</label>
                         <x-element.input
                             name="password"
                             type="password"
@@ -56,11 +56,11 @@
                             placeholder="パスワードを入力"
                             required
                         />
-                        <p class="text-sm mt-2">8文字以上で、大文字・小文字・数字・記号を全て含むこと</p>
-                        <x-element.input-error name="password" class="mt-2" />
+                        <p class="text-sm">8文字以上で、大文字・小文字・数字・記号を全て含むこと</p>
+                        <x-element.input-error name="password" />
                     </div>
-                    <div class="mb-2">
-                        <label class="block mb-2" for="password_confirmation">パスワード確認</label>
+                    <div class="flex flex-col gap-2">
+                        <label for="password_confirmation">パスワード確認</label>
                         <x-element.input
                             name="password_confirmation"
                             type="password"

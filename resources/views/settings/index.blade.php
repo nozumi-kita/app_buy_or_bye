@@ -51,12 +51,7 @@
             <div class="flex flex-col rounded-md border border-line">
                 <h3 class="text-xl px-4 pt-2 pb-4">アカウント削除</h3>
                 <div class="flex flex-col" x-data="{ open: false }" @keydown.escape.window="open = false">
-                    @error('password')
-                        <p class="text-error mb-2 px-4 flex gap-1">
-                            <x-icon.exclamation-circle />
-                            {{ $message }}
-                        </p>
-                    @enderror
+                    <x-element.input-error name="password" class="mb-2 px-4" />
                     <p class="px-4 pb-4">アカウントは一度削除すると戻せません。</p>
                     <x-element.button
                         theme="danger"

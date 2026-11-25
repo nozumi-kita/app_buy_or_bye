@@ -8,13 +8,8 @@
                 ホームに戻る
             </a>
         @else
-            <a class="size-9 flex justify-center items-center rounded-full mx-2 hover:bg-highlight transition duration-300 ease-in-out md:mx-6 self-start"
-                href="{{ route('login') }}" aria-label="戻る"
-            >
-                <x-icon.chevron-left />
-            </a>
+            <x-element.back-link :href="route('login')" class="mx-2 md:mx-6" />
         @endif
-
         <h1 class="mb-4 text-2xl text-center">ユーザー登録</h1>
         @if ($guestLoggedIn)
             <p class="mx-4 mb-3 md:mx-6">

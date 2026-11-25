@@ -1,11 +1,7 @@
 <x-layouts.app>
     <section>
         <div class="grid grid-cols-3 text-2xl pb-4 mb-4 border-b border-line">
-            <a class="flex justify-center items-center size-9 hover:bg-highlight transition duration-300 ease-in-out rounded-full justify-self-start"
-                href="{{ route('items.index') }}" aria-label="戻る"
-            >
-                <x-icon.chevron-left />
-            </a>
+            <x-element.back-link :href="route('items.index')" />
             <h2 class="text-center">実績</h2>
         </div>
         <ul class="grid grid-cols-1 gap-4 md:grid-cols-3">

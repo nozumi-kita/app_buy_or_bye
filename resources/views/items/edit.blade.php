@@ -4,11 +4,7 @@
     <section>
         <div class="text-2xl pb-4 mb-2 border-b border-line">
             <div class="grid grid-cols-[1fr_auto_1fr] mx-auto max-w-md px-4">
-                <a class="flex size-9 justify-center items-center rounded-full hover:bg-highlight transition duration-300 ease-in-out justify-self-start"
-                    href="{{ route('items.index') }}" aria-label="戻る"
-                >
-                    <x-icon.chevron-left />
-                </a>
+                <x-element.back-link :href="route('items.index')" />
                 <h2>編集</h2>
             </div>
         </div>

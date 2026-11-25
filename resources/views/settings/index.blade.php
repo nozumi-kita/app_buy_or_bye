@@ -2,11 +2,7 @@
     <section>
         <div class="text-center text-2xl border-b border-line pb-4 mb-4">
             <div class="grid grid-cols-[1fr_auto_1fr] mx-auto max-w-md">
-                <a class="flex size-9 justify-center items-center hover:bg-highlight transition duration-300 ease-in-out rounded-full justify-self-start"
-                    href="{{ route('items.index') }}" aria-label="戻る"
-                >
-                    <x-icon.chevron-left />
-                </a>
+                <x-element.back-link :href="route('items.index')" />
                 <h2>設定</h2>
             </div>
         </div>

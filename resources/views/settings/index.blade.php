@@ -12,10 +12,9 @@
         </div>
         <div class="mx-auto max-w-md">
             @if (session('success'))
-                <p class="flex justify-center gap-1 bg-flash-success p-3 rounded-3xl mb-4 text-fg-on-emphasis">
-                    <x-icon.check-circle />
+                <x-element.flash class="mb-4">
                     {{ session('success') }}
-                </p>
+                </x-element.flash>
             @endif
             <div class="mb-4 border border-line rounded-md">
                 <div class="flex justify-between items-center px-4 py-1 mb-4">

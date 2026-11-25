@@ -31,16 +31,14 @@
             </div>
         </div>
         @if (session('success'))
-            <p class="flex justify-center gap-1 rounded-3xl bg-flash-success p-3 mb-4 text-fg-on-emphasis">
-                <x-icon.check-circle />
+            <x-element.flash class="mb-4">
                 {{ session('success') }}
-            </p>
+            </x-element.flash>
         @endif
         @foreach (session('awardedMedalNames', []) as $medalName)
-            <p class="flex rounded-3xl gap-1 bg-flash-info justify-center p-3 mb-4 text-fg-on-emphasis">
-                <x-icon.trophy />
+            <x-element.flash type="info" class="mb-4">
                 <span>実績:「{{ $medalName }}」を達成しました！</span>
-            </p>
+            </x-element.flash>
         @endforeach
         @if ($items->isEmpty())
             <p>表示するものがありません</p>

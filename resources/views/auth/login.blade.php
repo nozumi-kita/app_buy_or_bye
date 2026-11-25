@@ -8,11 +8,9 @@
         </section>
         <section class="mx-auto w-full max-w-md px-2 flex flex-col min-h-dvh justify-center">
             @if (session('success'))
-                <p
-                    class="flex items-center justify-center rounded-3xl bg-flash-success text-fg-on-emphasis p-3 mb-4 mx-4 md:mx-6">
-                    <x-icon.check-circle />
+                <x-element.flash class="mb-4 mx-4 md:mx-6">
                     {{ session('success') }}
-                </p>
+                </x-element.flash>
             @endif
             <img class="block mx-auto size-15 mb-4 md:hidden" src="{{ asset('images/app-logo.svg') }}" alt="Buy or Bye">
             <h1 class="mb-4 text-2xl text-center md:mb-8">ログイン</h1>

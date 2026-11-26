@@ -62,33 +62,23 @@
                             </p>
                         </div>
                     @else
-                        <div>
-                            <div x-data="{ open: false }" @keydown.escape.window="open=false">
-                                <x-element.button theme="secondary" @click="open = !open">
+                        <x-element.modal>
+                            <x-slot:trigger>
+                                <x-element.button theme="secondary">
                                     ゲストログイン
                                 </x-element.button>
-                                <div x-show="open" x-cloak
-                                    class="flex flex-col fixed inset-0 items-center justify-center bg-modal-bg"
-                                >
-                                    <div class="flex flex-col gap-3 bg-modal rounded-xl px-4 py-3 max-w-sm mx-4 mt-2 border border-line"
-                                        @click.outside="open = false"
-                                    >
-                                        <p class="mb-2">ゲストログインを開始します。よろしいですか？</p>
-                                        <div class="grid grid-cols-2 gap-3">
-                                            <x-element.button theme="secondary" @click="open = false">
-                                                キャンセル
-                                            </x-element.button>
-                                            <form method="POST" action="{{ route('guest-login') }}">
-                                                @csrf
-                                                <x-element.button type="submit">
-                                                    ゲストログイン
-                                                </x-element.button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                            </x-slot:trigger>
+                            <p class="mb-2">ゲストログインを開始します。よろしいですか？</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <x-element.modal-close />
+                                <form method="POST" action="{{ route('guest-login') }}">
+                                    @csrf
+                                    <x-element.button type="submit">
+                                        ゲストログイン
+                                    </x-element.button>
+                                </form>
                             </div>
-                        </div>
+                        </x-element.modal>
                     @endif
                 </div>
                 <div class="flex items-center justify-center p-4">

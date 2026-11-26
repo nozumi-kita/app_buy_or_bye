@@ -10,101 +10,64 @@
         <nav class="hidden md:flex items-center">
             <ul class="flex items-center gap-4">
                 <li>
-                    <a class="flex items-center gap-1 p-2 rounded-lg hover:bg-highlight transition duration-300"
-                        href="{{ route('items.index') }}"
-                    >
-                        <x-icon.home />
-                        <span>ホーム</span>
-                    </a>
+                    <x-element.navigation-item :href="route('items.index')" icon="home">
+                        ホーム
+                    </x-element.navigation-item>
                 </li>
                 @auth
                     <li>
-                        <a class="flex items-center gap-1 p-2 rounded-lg hover:bg-highlight transition duration-300"
-                            href="{{ route('medals') }}"
-                        >
-                            <x-icon.trophy />
-                            <span>実績</span>
-                        </a>
+                        <x-element.navigation-item :href="route('medals')" icon="trophy">
+                            実績
+                        </x-element.navigation-item>
                     </li>
                     <li>
-                        <a class="flex items-center gap-1 p-2 rounded-lg hover:bg-highlight transition duration-300"
-                            href="{{ route('settings.index') }}"
-                        >
-                            <x-icon.cog-8-tooth />
-                            <span>設定</span>
-                        </a>
+                        <x-element.navigation-item :href="route('settings.index')" icon="cog-8-tooth">
+                            設定
+                        </x-element.navigation-item>
                     </li>
                     <li>
-                        <div x-data="{ open: false }" @keydown.escape.window="open = false">
-                            <button
-                                class="cursor-pointer flex items-center gap-1 p-2 rounded-lg hover:bg-highlight transition duration-300"
-                                type="button" @click="open = !open"
-                            >
-                                <x-icon.arrow-right-start-on-rectangle />
-                                ログアウト
-                            </button>
-                            <div x-show="open" x-cloak
-                                class="flex flex-col fixed inset-0 items-center justify-center bg-modal-bg z-100"
-                            >
-                                <div class="flex flex-col gap-3 bg-modal rounded-xl px-4 py-3 max-w-sm mx-4 mt-2 border border-line"
-                                    @click.outside="open = false"
-                                >
-                                    <p class="mb-2">ログアウトします。本当によろしいですか？</p>
-                                    <div class="grid grid-cols-2 gap-3">
-                                        <x-element.button theme="secondary" @click="open = false">
-                                            キャンセル
-                                        </x-element.button>
-                                        <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            <x-element.button type="submit">
-                                                ログアウト
-                                            </x-element.button>
-                                        </form>
-                                    </div>
-                                </div>
+                        <x-element.modal>
+                            <x-slot:trigger>
+                                <x-element.navigation-item icon="arrow-right-start-on-rectangle">
+                                    ログアウト
+                                </x-element.navigation-item>
+                            </x-slot:trigger>
+                            <p class="mb-2">ログアウトします。本当によろしいですか？</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <x-element.modal-close />
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-element.button type="submit">
+                                        ログアウト
+                                    </x-element.button>
+                                </form>
                             </div>
-                        </div>
+                        </x-element.modal>
                     </li>
                 @else
                     <li>
-                        <a class="flex items-center gap-1 hover:bg-highlight p-2 rounded-lg transition duration-300"
-                            href="{{ route('register') }}"
-                        >
-                            <x-icon.user-plus />
-                            <span>アカウント作成</span>
-                        </a>
+                        <x-element.navigation-item :href="route('register')" icon="user-plus">
+                            アカウント作成
+                        </x-element.navigation-item>
                     </li>
                     <li>
-                        <div x-data="{ open: false }" @keydown.escape.window="open = false">
-                            <button
-                                class="flex items-center cursor-pointer gap-1 p-2 rounded-lg hover:bg-highlight transition duration-300"
-                                type="button" @click="open = !open"
-                            >
-                                <x-icon.arrow-right-start-on-rectangle />
-                                ゲスト終了
-                            </button>
-                            <div x-show="open" x-cloak
-                                class="flex flex-col fixed inset-0 items-center justify-center text-fg bg-modal-bg z-100"
-                            >
-                                <div class="flex flex-col gap-3 bg-modal rounded-xl px-4 py-4 max-w-sm mx-4 mt-2 border border-line"
-                                    @click.outside = "open = false"
-                                >
-                                    <p class="mb-2">ゲストログインを終了すると、<span
-                                            class="text-danger">登録したデータは二度と表示できません。</span>よろしいですか？</p>
-                                    <div class="grid grid-cols-2 gap-3">
-                                        <x-element.button theme="secondary" @click="open = false">
-                                            キャンセル
-                                        </x-element.button>
-                                        <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            <x-element.button type="submit">
-                                                ゲスト終了
-                                            </x-element.button>
-                                        </form>
-                                    </div>
-                                </div>
+                        <x-element.modal>
+                            <x-slot:trigger>
+                                <x-element.navigation-item icon="arrow-right-start-on-rectangle">
+                                    ゲスト終了
+                                </x-element.navigation-item>
+                            </x-slot:trigger>
+                            <p class="mb-2">ゲストログインを終了すると、<span class="text-danger">登録したデータは二度と表示できません。</span>よろしいですか？</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <x-element.modal-close />
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-element.button type="submit">
+                                        ゲスト終了
+                                    </x-element.button>
+                                </form>
                             </div>
-                        </div>
+                        </x-element.modal>
                     </li>
                 @endauth
             </ul>

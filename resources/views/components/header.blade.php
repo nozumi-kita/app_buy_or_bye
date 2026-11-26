@@ -7,8 +7,9 @@
                 >
             </a>
         </h1>
-        <nav class="hidden md:flex items-center">
-            <ul class="flex items-center gap-4">
+        <nav
+            class="fixed border-t border-line bottom-0 z-5 inset-x-0 pb-1 bg-canvas md:static md:border-t-0 md:z-auto md:pb-0 md:flex md:items-center md:bg-transparent">
+            <ul class="grid auto-cols-fr grid-flow-col md:flex md:items-center md:gap-4">
                 <li>
                     <x-element.navigation-item :href="route('items.index')" icon="home">
                         ホーム

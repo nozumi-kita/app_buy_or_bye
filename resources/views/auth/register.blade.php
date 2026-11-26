@@ -1,12 +1,10 @@
 <x-layouts.guest>
-    <section class="mx-auto w-full max-w-md px-2 flex flex-col min-h-dvh justify-center">
+    <section class="mx-auto w-full max-w-md px-2 flex flex-col min-h-dvh justify-center py-4">
         @if ($guestLoggedIn)
-            <a class="inline-flex self-start mx-4 mt-4 mb-4 hover:underline hover:underline-offset-2 text-link hover:text-link-hover md:mx-6"
-                href="{{ route('items.index') }}"
-            >
+            <x-element.link :href="route('items.index')" class="mx-4 mb-4 md:mx-6 inline-flex self-start">
                 <x-icon.home />
                 ホームに戻る
-            </a>
+            </x-element.link>
         @else
             <x-element.back-link :href="route('login')" class="mx-2 md:mx-6" />
         @endif
@@ -71,9 +69,10 @@
             </div>
             @if (!$guestLoggedIn)
                 <div class="flex items-center justify-center p-4">
-                    <p>アカウントをお持ちの方：<a class="hover:underline hover:underline-offset-4 text-link hover:text-link-hover"
-                            href="{{ route('login') }}"
-                        >ログイン</a>
+                    <p>アカウントをお持ちの方：
+                        <x-element.link :href="route('login')">
+                            ログイン
+                        </x-element.link>
                     </p>
                 </div>
             @endif

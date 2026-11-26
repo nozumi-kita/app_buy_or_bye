@@ -53,12 +53,10 @@
                     </div>
                     @if ($guestLoggedIn)
                         <div class="flex flex-col border border-line rounded-xl px-2 py-2">
-                            <a class="flex self-center mb-2 text-link hover:underline hover:underline-offset-2 hover:text-link-hover hover:decoration-2"
-                                href="{{ route('items.index') }}"
-                            >
+                            <x-element.link :href="route('items.index')" class="flex self-center mb-2">
                                 <x-icon.home />
                                 ホームに戻る
-                            </a>
+                            </x-element.link>
                             <p class="mx-1">
                                 ゲストログイン中です。データを引き継いで利用を開始する場合、下記リンクよりアカウントを作成してください。
                             </p>
@@ -95,10 +93,9 @@
                 </div>
                 <div class="flex items-center justify-center p-4">
                     <p>アカウントをお持ちでない方：
-                        <a href="{{ route('register') }}"
-                            class="text-link hover:underline hover:underline-offset-4 hover:text-link-hover"
-                        >ユーザー登録
-                        </a>
+                        <x-element.link :href="route('register')">
+                            ユーザー登録
+                        </x-element.link>
                     </p>
                 </div>
             </div>

@@ -28,7 +28,7 @@
                                 autofocus
                                 required
                             />
-                            <x-element.input-error name="email" class="mt-2" />
+                            <x-element.input-error name="email" />
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="password">パスワード</label>
@@ -39,7 +39,7 @@
                                 placeholder="パスワードを入力"
                                 required
                             />
-                            <x-element.input-error name="password" class="mt-2" />
+                            <x-element.input-error name="password" />
                         </div>
                         <x-element.button type="submit">
                             ログイン

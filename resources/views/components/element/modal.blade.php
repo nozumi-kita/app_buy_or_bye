@@ -5,11 +5,11 @@
 --}}
 @props(['closeClickOutside' => true])
 
-<div x-data="{ open: false }" @keydown.escape.window="open=false" {{ $attributes }}>
-    <div class="contents" @click="open = true">{{ $trigger }}</div>
-    <div x-show="open" x-cloak class="flex flex-col fixed inset-0 items-center justify-center bg-modal-bg z-100">
+<div x-data="{ modal: false }" @keydown.escape.window="modal = false" {{ $attributes }}>
+    <div class="contents" @click="modal = true">{{ $trigger }}</div>
+    <div x-show="modal" x-cloak class="flex flex-col fixed inset-0 items-center justify-center bg-modal-bg z-100">
         <div class="flex flex-col gap-3 bg-modal rounded-xl px-4 py-3 max-w-sm mx-4 border border-line"
-            @if ($closeClickOutside) @click.outside="open = false" @endif
+            @if ($closeClickOutside) @click.outside="modal = false" @endif
         >
             {{ $slot }}
         </div>

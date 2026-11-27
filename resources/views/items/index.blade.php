@@ -53,23 +53,12 @@
                                     {{ $item->name }}
                                 </a>
                             </h3>
-                            <a
-                                href="{{ route('items.edit', $item) }}"
-                                class="flex justify-center items-center relative rounded size-9 hover:bg-highlight transition duration-300 shrink-0"
-                                aria-label="編集"
-                                x-data="{ open: false }"
-                                @mouseenter="open = true"
-                                @mouseleave="open = false"
-                            >
-                                <x-icon.pencil-square size="size-6" />
-                                <span
-                                    class="pointer-events-none text-sm top-full mt-1 text-fg-on-emphasis bg-surface rounded px-2 py-1 absolute whitespace-nowrap left-1/2 -translate-x-1/2"
-                                    x-show="open"
-                                    x-transition.duration.200ms
-                                    x-cloak
-                                >編集
-                                </span>
-                            </a>
+                            <x-element.icon-button
+                                :href="route('items.edit', $item)"
+                                icon="pencil-square"
+                                label="編集"
+                                icon-size="size-6"
+                            />
                         </div>
                         <div class="flex flex-1 flex-col gap-4">
                             <div>

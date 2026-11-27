@@ -60,7 +60,6 @@ describe('ログインユーザー', function () {
                 ->get(route('items.index'))
                 ->assertOk()
                 ->assertDontSee('ゲストユーザーのアイテム');
-
         });
 
         test('気になるものを1件も登録していない場合、「表示するものがありません」と表示されること', function () {
@@ -128,7 +127,7 @@ describe('ログインユーザー', function () {
                     'Test見送り',
                 ]);
 
-            $this->get('/items?status=purchased')
+            $this->get(route('items.index', ['status' => ItemStatus::Purchased->value]))
                 ->assertViewHas('selectedStatus', ItemStatus::Purchased)
                 ->assertOk()
                 ->assertSee('Test購入済')
@@ -137,7 +136,7 @@ describe('ログインユーザー', function () {
                     'Test見送り',
                 ]);
 
-            $this->get('/items?status=purchase_avoided')
+            $this->get(route('items.index', ['status' => ItemStatus::PurchaseAvoided->value]))
                 ->assertViewHas('selectedStatus', ItemStatus::PurchaseAvoided)
                 ->assertOk()
                 ->assertSee('Test見送り')
@@ -160,14 +159,14 @@ describe('ログインユーザー', function () {
             ]);
 
             $this->actingAs($this->user)
-                ->get('/items?status=purchase_avoided')
+                ->get(route('items.index', ['status' => ItemStatus::PurchaseAvoided->value]))
                 ->assertOk()
                 ->assertSee('Test見送り');
 
-            $this->from('/items?status=purchase_avoided')
-                ->get('/items?status=testtest')
+            $this->from(route('items.index', ['status' => ItemStatus::PurchaseAvoided->value]))
+                ->get(route('items.index', ['status' => 'testtest']))
                 ->assertInvalid('status')
-                ->assertRedirect('/items?status=purchase_avoided');
+                ->assertRedirect(route('items.index', ['status' => ItemStatus::PurchaseAvoided->value]));
         });
     });
 
@@ -626,7 +625,7 @@ describe('ログインユーザー', function () {
                     'ログアウト',
                 ])->assertDontSee([
                     'アカウント作成',
-                    'ゲストログイン終了',
+                    'ゲスト終了',
                 ]);
         });
     });

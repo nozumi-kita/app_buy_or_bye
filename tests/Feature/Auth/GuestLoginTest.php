@@ -9,7 +9,7 @@ test('ログイン画面にゲストログインボタンが表示されてい�
     /** @var TestCase $this */
     $this->get(route('login'))
         ->assertOk()
-        ->assertSeeText('ゲストログイン');
+        ->assertSee(route('guest-login'));
 });
 
 test('ゲストログイン成功時に気になるもの一覧画面にリダイレクトされるが、認証はされていないこと', function () {
@@ -51,7 +51,7 @@ test('ゲストログイン時、ヘッダーの表示が切り替わること',
         ->assertOk()
         ->assertSee([
             'アカウント作成',
-            'ゲストログイン終了',
+            'ゲスト終了',
         ])->assertDontSee([
             '実績',
             '設定',
@@ -140,6 +140,8 @@ test('1分間に5回を超えてゲストログインできないこと', functi
 
 test('制限後1分間経過すると再びゲストログインできること', function () {
     /** @var TestCase $this */
+    $this->freezeTime();
+
     foreach (range(1, 5) as $_) {
         $this->post(route('guest-login'))
             ->assertRedirect(route('items.index'));

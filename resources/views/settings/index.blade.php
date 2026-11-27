@@ -15,23 +15,7 @@
             <div class="mb-4 border border-line rounded-md">
                 <div class="flex justify-between items-center px-4 py-1 mb-4">
                     <h3 class="text-xl">ユーザー情報</h3>
-                    <a
-                        class="flex justify-center items-center relative size-9 rounded-md hover:bg-highlight transition duration-300"
-                        href="{{ route('account.edit') }}"
-                        x-data="{ open: false }"
-                        @mouseenter="open = true"
-                        @mouseleave="open = false"
-                        aria-label="編集"
-                    >
-                        <x-icon.pencil-square />
-                        <span
-                            class="pointer-events-none text-sm top-full mt-1 bg-surface rounded px-2 py-1 absolute whitespace-nowrap left-1/2 -translate-x-1/2"
-                            x-show="open"
-                            x-transition.duration.200ms
-                            x-cloak
-                        >編集
-                        </span>
-                    </a>
+                    <x-element.icon-button :href="route('account.edit')" icon="pencil-square" label="編集" />
                 </div>
                 <dl class="px-4">
                     <div class="md:flex md:items-baseline mb-8 md:mb-6 md:gap-16">
@@ -46,49 +30,40 @@
             </div>
             <div class="flex flex-col rounded-md border border-line">
                 <h3 class="text-xl px-4 pt-2 pb-4">アカウント削除</h3>
-                <div class="flex flex-col" x-data="{ open: false }" @keydown.escape.window="open = false">
+                <div class="flex flex-col">
                     <x-element.input-error name="password" class="mb-2 px-4" />
                     <p class="px-4 pb-4">アカウントは一度削除すると戻せません。</p>
-                    <x-element.button
-                        theme="danger"
-                        :full-width="false"
-                        class="self-end px-2 mb-4 mr-4"
-                        @click="open = !open"
-                    >
-                        アカウントを削除する
-                    </x-element.button>
-                    <div x-show="open" x-cloak
-                        class="flex flex-col fixed inset-0 items-center justify-center text-fg bg-modal-bg z-10"
-                    >
-                        <div class="flex flex-col gap-3 bg-modal rounded-xl px-4 py-3 max-w-sm mx-4 border border-line">
-                            <p class="text-danger">アカウントを一度削除すると二度と戻せません。本当によろしいですか？</p>
-                            <div class="flex flex-col" x-data="{ password: '' }">
-                                <form method="POST" action="{{ route('account.destroy') }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <div class="flex flex-col">
-                                        <label class="mb-4" for="password">パスワード</label>
-                                        <x-element.input
-                                            name="password"
-                                            type="password"
-                                            placeholder="パスワードを入力"
-                                            required
-                                            x-model="password"
-                                            class="mb-4"
-                                        />
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-3">
-                                        <x-element.button theme="secondary" @click="open = false">
-                                            キャンセル
-                                        </x-element.button>
-                                        <x-element.button theme="danger" type="submit" ::disabled="password === ''">
-                                            削除
-                                        </x-element.button>
-                                    </div>
-                                </form>
-                            </div>
+                    <x-element.modal :close-click-outside="false" class="self-end mb-4 mr-4">
+                        <x-slot:trigger>
+                            <x-element.button theme="danger" :full-width="false" class="px-3">
+                                アカウント削除
+                            </x-element.button>
+                        </x-slot:trigger>
+                        <p class="text-danger">アカウントを一度削除すると二度と戻せません。本当によろしいですか？</p>
+                        <div class="flex flex-col" x-data="{ password: '' }">
+                            <form method="POST" action="{{ route('account.destroy') }}">
+                                @csrf
+                                @method('DELETE')
+                                <div class="flex flex-col">
+                                    <label class="mb-4" for="password">パスワード</label>
+                                    <x-element.input
+                                        name="password"
+                                        type="password"
+                                        placeholder="パスワードを入力"
+                                        required
+                                        x-model="password"
+                                        class="mb-4"
+                                    />
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <x-element.modal-close />
+                                    <x-element.button theme="danger" type="submit" ::disabled="password === ''">
+                                        削除
+                                    </x-element.button>
+                                </div>
+                            </form>
                         </div>
-                    </div>
+                    </x-element.modal>
                 </div>
             </div>
         </div>

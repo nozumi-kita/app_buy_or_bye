@@ -16,9 +16,9 @@
 
 ---
 
-## 使用技術(2026年11月7日時点)
+## 使用技術(2026年11月27日時点)
 
-- バックエンド: PHP 8.5.12 / Laravel 12.69.2
+- バックエンド: PHP 8.5.13 / Laravel 12.73.0
 - データベース: PostgreSQL 18
 - フロントエンド: Blade / Tailwind CSS 4.3.3 / Alpine.js 3.17.5 / JavaScript
 - テスト: Pest 4

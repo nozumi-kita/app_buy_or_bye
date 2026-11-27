@@ -62,7 +62,6 @@ describe('アカウント削除', function () {
         $this->assertGuest();
 
         $this->assertModelMissing($this->user);
-
     });
 
     test('パスワードが誤っている・空欄・なしではアカウントが削除されないこと', function (array $payload) {

@@ -185,13 +185,13 @@ describe('パスワードのバリデーションの強化', function () {
 
     test('本番環境では、条件を満たす場合パスワードは通ること', function () {
         /** @var TestCase $this */
+        // メールアドレスは DNS チェックで弾かれ登録自体は失敗するが、ここではパスワードのバリデーションだけを確認する
         $this->from(route('register'))
             ->post(route('register'), validRegistrationData([
                 'email' => 'test@example.test',
                 'password' => 'Tdsfdd@1',
                 'password_confirmation' => 'Tdsfdd@1',
-            ]))->assertRedirect(route('register'))
-            ->assertValid('password');
+            ]))->assertValid('password');
     });
 
     // ネット環境のない場所では、漏洩の確認がされずバリデーションで弾かれないのでテストが失敗します。

@@ -160,7 +160,7 @@ test('ログインに成功すると失敗回数がリセットされること',
         'password' => 'password',
     ])->assertRedirect(route('items.index'));
 
-    $this->isAuthenticated();
+    $this->assertAuthenticatedAs($user);
 
     Auth::logout();
 

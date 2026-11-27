@@ -54,7 +54,7 @@ describe('実績達成', function () {
         '購入回避2件/しきい値2件 → メダル付与' => [MedalConditionType::AvoidedCount, 2, true],
         '購入回避2件/しきい値3件 → メダル付与なし' => [MedalConditionType::AvoidedCount, 3, false],
         '購入回避額10,000円/しきい値10,000円 → メダル付与' => [MedalConditionType::AvoidedAmount, 10000, true],
-        '購入回避額10,000/しきい値10,001円 → メダル付与なし' => [MedalConditionType::AvoidedAmount, 10001, false],
+        '購入回避額10,000円/しきい値10,001円 → メダル付与なし' => [MedalConditionType::AvoidedAmount, 10001, false],
     ]);
 
     test('獲得済みのメダルは二重に付与されないこと', function () {
@@ -265,7 +265,7 @@ describe('実績達成', function () {
         ]);
     });
 
-    test('メダルが付与の条件を満たさない場合、フラッシュメッセージは表示されないこと', function () {
+    test('メダル付与の条件を満たさない場合、フラッシュメッセージは表示されないこと', function () {
         /** @var TestCase $this */
         Medal::factory()->create([
             'name' => 'テストメダル',

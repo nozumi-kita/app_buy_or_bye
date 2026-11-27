@@ -29,69 +29,24 @@
                     <dd class="break-all">{{ $item->status->label() }}</dd>
                 </div>
             </dl>
-            <div class="flex justify-between items-center" x-data="{ open: false, deleteOpen: false }">
-                <button
-                    class="flex size-9 justify-center items-center relative cursor-pointer hover:bg-highlight rounded-md transition duration-300 ease-in-out"
-                    type="button"
-                    aria-label="削除"
-                    @mouseenter="open = true"
-                    @mouseleave="open = false"
-                    @click="deleteOpen = !deleteOpen"
-                    @keydown.escape.window="deleteOpen = false"
-                >
-                    <x-icon.trash />
-                    <span
-                        class="pointer-events-none text-sm text-fg-on-emphasis top-full mt-1 bg-surface rounded px-2 py-1 absolute whitespace-nowrap left-1/2 -translate-x-1/2"
-                        x-show="open"
-                        x-transition.duration.200ms
-                        x-cloak
-                    >削除
-                    </span>
-                </button>
-                <div x-show="deleteOpen" x-cloak
-                    class="flex flex-col fixed inset-0 items-center justify-center bg-modal-bg z-10"
-                >
-                    <div class="flex flex-col gap-3 bg-canvas rounded-xl px-4 py-3 max-w-sm mx-4 mt-2 border border-line"
-                        @click.outside="deleteOpen = false"
-                    >
-                        <p>削除します。よろしいですか？</p>
-                        <div class="grid grid-cols-2 gap-3">
-                            <button
-                                class="cursor-pointer bg-secondary hover:bg-secondary-hover py-3 rounded-3xl text-fg-on-emphasis transition duration-300"
-                                type="button" @click="deleteOpen = false"
-                            >キャンセル</button>
-                            <form method="POST" action="{{ route('items.destroy', $item) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button
-                                    class="w-full py-3 cursor-pointer text-danger border rounded-3xl hover:text-fg-on-emphasis hover:bg-danger-solid-hover hover:border-danger-solid-hover transition duration-100"
-                                    type="submit"
-                                >
-                                    削除する
-                                </button>
-                            </form>
-                        </div>
+            <div class="flex justify-between items-center">
+                <x-element.modal>
+                    <x-slot:trigger>
+                        <x-element.icon-button icon="trash" label="削除" />
+                    </x-slot:trigger>
+                    <p>削除します。よろしいですか？</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <x-element.modal-close />
+                        <form method="POST" action="{{ route('items.destroy', $item) }}">
+                            @csrf
+                            @method('DELETE')
+                            <x-element.button theme="danger" type="submit">
+                                削除
+                            </x-element.button>
+                        </form>
                     </div>
-                </div>
-                <div>
-                    <a
-                        class="flex justify-center items-center size-9 relative hover:bg-highlight transition duration-300 ease-in-out rounded-md"
-                        aria-label="編集"
-                        href="{{ route('items.edit', $item) }}"
-                        x-data="{ open: false }"
-                        @mouseenter="open = true"
-                        @mouseleave="open = false"
-                    >
-                        <x-icon.pencil-square />
-                        <span
-                            class="pointer-events-none text-sm top-full mt-1 text-fg-on-emphasis bg-surface rounded px-2 py-1 absolute whitespace-nowrap left-1/2 -translate-x-1/2"
-                            x-show="open"
-                            x-transition.duration.200ms
-                            x-cloak
-                        >編集
-                        </span>
-                    </a>
-                </div>
+                </x-element.modal>
+                <x-element.icon-button :href="route('items.edit', $item)" icon="pencil-square" label="編集" />
             </div>
         </div>
     </section>
